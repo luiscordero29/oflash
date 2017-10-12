@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+
+.oflash-logo {
+    color: #FFF;
+}
+.oflash-logo {
+    position: relative;
+    margin: 0px;
+    display: inline-block;
+    overflow: hidden;
+    padding: 5px 0px 0px;
+}
+.post_list li .oflash-excerpt {
+    padding: 0px 5px;
+}

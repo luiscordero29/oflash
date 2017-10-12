@@ -1,0 +1,130 @@
+@import url(https://fonts.googleapis.com/css?family=Hind:400,600);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: "Hind", sans-serif;
+    background: #f9f9fb;
+    color: #fff;
+}
+.franja{
+	display: flex;
+	position: absolute;
+    background: #212429;
+    height: 300px;
+	width: 100%;
+}
+
+header {
+	margin: auto;
+}
+nav{
+    margin:0 auto;
+    width: 90%;
+    max-width: 1000px;
+	font-size: 1.2em;
+}
+
+nav ul{
+    list-style: none;
+    height: 30px;
+    margin-bottom: 0;
+}
+
+nav > ul {
+    display: table;
+    width: 100%;
+    background: #000;
+    position: relative;
+}
+
+nav > ul li {
+    display: table-cell;
+} 
+
+/* sub menu*/
+ul li {
+	vertical-align: middle;
+}
+nav > ul > li:hover ul{
+    display: block;
+    height: 100%;
+    z-index: 2;
+}
+nav > ul > li > ul {
+    display: block;
+    position: absolute;
+    background: #000;
+    left: 0;
+	top: 35px;
+    right: 0;
+    overflow: hidden;
+    height: 0%;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+nav > ul li a {
+    color: #fff;
+    display: block;
+    line-height: 15px;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+#menu{
+    width: 30px;
+    border-right: 1px solid rgba(255,255,255,0.1)
+}
+#logo{
+    margin: auto;
+    text-align: center;
+    left: 100%;
+}
+#redes{
+    width: 30px;
+    border-left: 1px solid rgba(255,255,255,0.1)
+}
+nav > ul > li  a:hover , nav > ul > li > ul > li a:hover{
+    background: #aaa;
+    color: #212121;
+    text-decoration: none;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+/* Carousel base class */
+.carousel {
+    margin:0 auto;
+    width: 100%;
+    max-width: 1000px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+    height: 50%;
+	left: 20px;
+	text-align: left;
+}
+.carousel-caption .fecha {
+	margin: auto;
+    font-size: 1em;
+	text-decoration: none;
+	left: 0;
+	padding: -20px;
+}
+.titulo {
+    font-size: 1.5em;
+	font-style: bold;
+	left: 0;
+}
