@@ -4,6 +4,42 @@ Class Site_model extends CI_MODEL
 	public function __construct()
 	{
 		parent::__construct();
+	} 
+
+	public function slides()
+	{
+	    $this->db->limit(5);
+	    $this->db->order_by('contenidos.fecha_publicado', 'DESC');
+	    $this->db->join('categorias', 'contenidos.id_categoria = categorias.id_categoria', 'left');
+	    $query = $this->db->get('contenidos');
+	    if($query->num_rows() > 0){
+	      	return $query->result_array();
+	    }else{
+	      	return false;
+	    }
+	}  
+
+	function articulos()
+	{
+	    $this->db->limit(18, 5);
+	    $this->db->order_by('contenidos.fecha_publicado', 'DESC');
+	    $this->db->join('categorias', 'contenidos.id_categoria = categorias.id_categoria', 'left');
+	    $query = $this->db->get('contenidos');
+	    if($query->num_rows() > 0){
+	      	return $query->result_array();
+	    }else{
+	      	return false;
+	    }
+	}
+
+	function categorias()
+	{
+	    $query = $this->db->get('categorias');
+	    if($query->num_rows() > 0){
+	      	return $query->result_array();
+	    }else{
+	      	return false;
+	    }
 	}
 
 	function login($username, $password)
@@ -27,68 +63,7 @@ Class Site_model extends CI_MODEL
 	    }
 	} 
 
-	function categorias()
-	{
-	    
-	    $sql = "
-	    	SELECT * FROM categorias	    	
-	    ";
 
-	    $query = $this->db->query($sql);
-
-	    if($query->num_rows() > 0)
-	    {
-	      return $query->result_array();
-	    }
-	    else
-	    {
-	      return false;
-	    }
-	} 
-
-	function slide()
-	{
-	    
-	    $sql = "
-	    	SELECT k.*, c.categoria FROM
-	    	contenidos k 
-	    	LEFT JOIN categorias c ON c.id_categoria = k.id_categoria
-	    	ORDER BY k.fecha_publicado DESC LIMIT 5 
-	    ";
-
-	    $query = $this->db->query($sql);
-
-	    if($query->num_rows() > 0)
-	    {
-	      return $query->result_array();
-	    }
-	    else
-	    {
-	      return false;
-	    }
-	}  
-
-	function articulos()
-	{
-	    
-	    $sql = "
-	    	SELECT k.*, c.categoria FROM
-	    	contenidos k 
-	    	LEFT JOIN categorias c ON c.id_categoria = k.id_categoria
-	    	ORDER BY k.fecha_publicado DESC LIMIT 5 , 18
-	    ";
-
-	    $query = $this->db->query($sql);
-
-	    if($query->num_rows() > -10)
-	    {
-	      return $query->result_array();
-	    }
-	    else
-	    {
-	      return false;
-	    }
-	}
 
 	function get_blog_rows($id_categoria)
 	{

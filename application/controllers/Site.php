@@ -15,31 +15,10 @@ class Site extends CI_Controller {
 	
 	public function index()
 	{
-		$data['slide'] = $this->Site_model->slide();
+		$data['slides'] = $this->Site_model->slides();
 		$data['articulos'] = $this->Site_model->articulos();
 		$data['categorias'] = $this->Site_model->categorias();
 		$this->load->view('site/index',$data);
-	}
-
-	public function post($id_articulo=false)
-	{
-		$this->load->helper('directory');
-
-		if($id_articulo===FALSE)
-		{
-			show_404();
-		}
-
-		$data['articulo'] = $this->Site_model->get_articulo($id_articulo);
-		$data['categorias'] = $this->Site_model->categorias();
-		
-		if (empty($data['articulo']))
-		{
-			show_404();
-		}
-		
-		$this->load->view('site/post', $data);
-
 	}
 
 	public function blog($id_categoria=false)
@@ -67,6 +46,29 @@ class Site extends CI_Controller {
 		$this->load->view('site/blog', $data);
 		
 	}
+
+	public function post($id_articulo=false)
+	{
+		$this->load->helper('directory');
+
+		if($id_articulo===FALSE)
+		{
+			show_404();
+		}
+
+		$data['articulo'] = $this->Site_model->get_articulo($id_articulo);
+		$data['categorias'] = $this->Site_model->categorias();
+		
+		if (empty($data['articulo']))
+		{
+			show_404();
+		}
+		
+		$this->load->view('site/post', $data);
+
+	}
+
+	
 
 	public function search()
 	{		

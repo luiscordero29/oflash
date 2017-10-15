@@ -163,19 +163,19 @@
 				 		<a href="<?php echo site_url(""); ?>">INICIO</a>
 				 		</li>				 						 		
 				 		<li class="menu-item <?php if(uri_string()=="eventos") { echo 'current-menu-item';} ?>">
-				 		<a href="<?php echo site_url("site/faq");?>">EVENTOS</a>
+				 		<a href="<?php echo site_url("eventos");?>">EVENTOS</a>
 				 		</li>
 				 		<li class="menu-item <?php if(uri_string()=="one-to-one") { echo 'current-menu-item';} ?>">
-				 		<a href="<?php echo site_url("site/faq");?>">ONE TO ONE</a>
+				 		<a href="<?php echo site_url("one-to-one");?>">ONE TO ONE</a>
 				 		</li>
 				 		<li class="menu-item <?php if(uri_string()=="oflash-news") { echo 'current-menu-item';} ?>">
-				 		<a href="<?php echo site_url("site/faq");?>">OFLASH NEWS</a>
+				 		<a href="<?php echo site_url("oflash-news");?>">OFLASH NEWS</a>
 				 		</li>
 				 		<li class="menu-item <?php if(uri_string()=="faq") { echo 'current-menu-item';} ?>">
-				 		<a href="<?php echo site_url("site/faq");?>">PREGUNTAS</a>
+				 		<a href="<?php echo site_url("faq");?>">PREGUNTAS</a>
 				 		</li>
 				 		<li class="menu-item <?php if(uri_string()=="contact") { echo 'current-menu-item';} ?>">
-				 		<a href="<?php echo site_url("site/contacts");?>">CONTACTANOS</a>
+				 		<a href="<?php echo site_url("contact");?>">CONTACTANOS</a>
 				 		</li>
 					</ul>
 				</nav>
