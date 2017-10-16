@@ -16,35 +16,32 @@ class Site extends CI_Controller {
 	public function index()
 	{
 		$data['slides'] = $this->Site_model->slides();
-		$data['articulos'] = $this->Site_model->articulos();
-		$data['categorias'] = $this->Site_model->categorias();
+		$data['articles'] = $this->Site_model->articles();
 		$this->load->view('site/index',$data);
 	}
 
-	public function blog($id_categoria=false)
-	{		
-			
-		if($id_categoria===FALSE)
-		{
+	public function blog($id_category=false)
+	{			
+		if($id_category===FALSE){
 			show_404();
 		}
 
-		$page = ($this->uri->segment(5))? $this->uri->segment(5) : 0;
-	
-		$data['categorias'] = $this->Site_model->categorias();
-		$data['categoria'] = $this->Site_model->get_categoria($id_categoria);
-		$data['articulos'] = $this->Site_model->get_blog($id_categoria,$page*4,4);
-		$data['rows'] = $this->Site_model->get_blog_rows($id_categoria);
-		$data['page'] = $page;
+		# get category
+		$data['category'] = $this->Site_model->get_category($id_category);
+
+		# table articles
+		$table_rows_limit = 4;
+		$table_page_current = ($this->uri->segment(4))? $this->uri->segment(4) : 0;		
+		$data['table'] = $this->Site_model->table_articles($table_rows_limit*$table_page_current,$table_rows_limit);
+		$data['table_counts'] = $this->Site_model->table_articles_counts();
+		$data['table_page_current'] = $table_page_current;
+		$data['table_rows_limit'] = $table_rows_limit;
 		
-		
-		if (empty($data['articulos']))
-		{
+		if ($data['table_counts']>0){
+			$this->load->view('site/blog', $data);
+		}else{
 			show_404();
 		}
-		
-		$this->load->view('site/blog', $data);
-		
 	}
 
 	public function post($id_articulo=false)

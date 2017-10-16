@@ -19,7 +19,7 @@ Class Site_model extends CI_MODEL
 	    }
 	}  
 
-	function articulos()
+	function articles()
 	{
 	    $this->db->limit(18, 5);
 	    $this->db->order_by('contenidos.fecha_publicado', 'DESC');
@@ -32,14 +32,33 @@ Class Site_model extends CI_MODEL
 	    }
 	}
 
-	function categorias()
+	function get_category($id_category)
 	{
-	    $query = $this->db->get('categorias');
+	    $query = $this->db->get_where('categorias', array('id_categoria' => $id_category) );
+	    if($query->num_rows() > 0){
+	      	return $query->row_array();
+	    }else{
+	      	return false;
+	    }
+	}
+
+	function table_articles($limit,$start)
+	{
+	    $this->db->order_by('contenidos.fecha_publicado', 'DESC');
+	    $this->db->join('categorias', 'contenidos.id_categoria = categorias.id_categoria', 'left');
+	    $query = $this->db->get('contenidos', $start, $limit);
+
 	    if($query->num_rows() > 0){
 	      	return $query->result_array();
 	    }else{
 	      	return false;
 	    }
+	}
+
+	function table_articles_counts()
+	{
+	    $this->db->from('contenidos');
+	    return $this->db->count_all_results();
 	}
 
 	function login($username, $password)
@@ -137,26 +156,7 @@ Class Site_model extends CI_MODEL
 	    }
 	}
 
-	function get_categoria($id_categoria)
-	{
-	    
-	    $sql = "
-	    	SELECT * FROM
-	    	categorias
-	    	WHERE 
-	    	id_categoria = ".$id_categoria;
-
-	    $query = $this->db->query($sql);
-
-	    if($query->num_rows() > 0)
-	    {
-	      return $query->row_array();
-	    }
-	    else
-	    {
-	      return false;
-	    }
-	}
+	
 
 	function get_articulo($id_articulo)
 	{

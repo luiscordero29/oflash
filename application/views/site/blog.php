@@ -5,14 +5,14 @@
 	<base href="<?php echo base_url().'index.php/'.uri_string();?>" />
   	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
   	<meta name="robots" content="index, follow" />
-  	<title><?php echo $categoria['categoria']; ?> | OFLASH.com.ve</title>
+  	<title><?php echo $category['categoria']; ?> | OFLASH.com.ve</title>
   	<meta name="author" content="OFLASH.com.ve" />
   	<meta property="og:url" content="<?php echo base_url().'index.php/'.uri_string();?>" />
-  	<meta property="og:title" content="<?php echo $categoria['categoria']; ?>" />
+  	<meta property="og:title" content="<?php echo $category['categoria']; ?>" />
   	<meta property="og:type" content="article" />
-  	<meta property="og:description" content="<?php echo $categoria['meta_des']; ?>" />
-  	<meta name="description" content="<?php echo $categoria['meta_des']; ?>" />
-  	<meta name="keywords" content="<?php echo $categoria['meta_key']; ?>" />
+  	<meta property="og:description" content="<?php echo $category['meta_des']; ?>" />
+  	<meta name="description" content="<?php echo $category['meta_des']; ?>" />
+  	<meta name="keywords" content="<?php echo $category['meta_key']; ?>" />
   	<meta name="generator" content="Ing. Luis Cordero - www.luiscordero29.com" />
 	
 	<link rel="icon" href="<?php echo base_url();?>assets/public/images/favicon.ico" type="image/x-icon" />
@@ -196,29 +196,29 @@
 
         <div id="content" class="grid_8 right">
         	<div class="header-title">
-	    		<h1><?php echo $categoria['categoria']; ?></h1>
+	    		<h1><?php echo $category['categoria']; ?></h1>
     		</div> 
 		    <?php 
-				foreach($articulos as $a):
+				foreach($table as $r):
 			?>
 			
 				<article class="post-holder">
         		<header class="entry-header">
           			<h2>
-          			<a href="<?php echo site_url("site/post"."/".$a['id_contenido']);?>" title="<?php echo $a['titulo']; ?>" rel="bookmark"><?php echo $a['titulo']; ?></a>
+          			<a href="<?php echo site_url("site/post"."/".$r['id_contenido']);?>" title="<?php echo $r['titulo']; ?>" rel="bookmark"><?php echo $r['titulo']; ?></a>
           			</h2>
-          			<div class="post-meta">Publicado el <time datetime="<?php echo $a['fecha_publicado']; ?>"><?php echo date("d.m.Y", strtotime($a['fecha_publicado'])); ?></time> | CORPORACION OFLASH                 </div><!--.post-meta-->
+          			<div class="post-meta">Publicado el <time datetime="<?php echo $r['fecha_publicado']; ?>"><?php echo date("d.m.Y", strtotime($r['fecha_publicado'])); ?></time> | CORPORACION OFLASH                 </div><!--.post-meta-->
           		
         		</header>
         		<figure class="featured-thumbnail">
         			<span class="img-wrap">
-        			<a href="<?php echo site_url("site/post"."/".$a['id_contenido']);?>">
-        				<img width="269" height="124" src="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $a['id_contenido']; ?>/articulo-269x124.jpg" alt="<?php echo $a['titulo']; ?>" title="<?php echo $a['titulo']; ?>" />
+        			<a href="<?php echo site_url("site/post"."/".$r['id_contenido']);?>">
+        				<img width="269" height="124" src="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $r['id_contenido']; ?>/articulo-269x124.jpg" alt="<?php echo $r['titulo']; ?>" title="<?php echo $r['titulo']; ?>" />
         			</a>
         			</span>
         		</figure>                
         		<div class="post-content">
-		  	        <div class="excerpt"><?php echo   trim(strip_tags($a['resumen'])); ?></div>
+		  	        <div class="excerpt"><?php echo   trim(strip_tags($r['resumen'])); ?></div>
         		</div>
         		<div class="clear"></div>
       		</article>
@@ -227,28 +227,28 @@
       		  
  
     	<div class='wp-pagenavi'>
+    		
     	<?php 
-    		//echo $rows;
-    		$p = (int)($rows / 4);
-    		for ($i=0; $i <= $p ; $i++) { 
-    			# code...
-    			if ($i==0) {
-    				if($page==$i){
+    		$pagination = (int)($table_counts / $table_rows_limit);
+    		for ($item = 0; $item <= $pagination ; $item++) { 
+    			# bucle
+    			if ($item==0) {
+    				if($item==$table_page_current){
     					echo "<span class='current'>Primera Pág.</span>";	
     				}else{
-    					echo "<a href='".site_url('site/blog/'.$categoria['id_categoria'].'/page/'.$i)."' class='page larger'>Primera Pág.</a>";	
+    					echo "<a href='".site_url('site/blog/'.$category['id_categoria'].'/page/'.$item)."' class='page larger'>Primera Pág.</a>";	
     				}
-    			}elseif($i==$p){
-    				if($page==$i){
+    			}elseif($item==$pagination){
+    				if($item==$table_page_current){
     					echo "<span class='current'>Ultima Pág.</span>";	
     				}else{
-    					echo "<a href='".site_url('site/blog/'.$categoria['id_categoria'].'/page/'.$i)."' class='page larger'>Ultima Pág.</a>";	
+    					echo "<a href='".site_url('site/blog/'.$category['id_categoria'].'/page/'.$item)."' class='page larger'>Ultima Pág.</a>";	
     				}    				
     			}else{    				
-    				if($page==$i){
-    					echo "<span class='current'>".$i."</span>";	
+    				if($item==$table_page_current){
+    					echo "<span class='current'>".$item."</span>";	
     				}else{
-    					echo "<a href='".site_url('site/blog/'.$categoria['id_categoria'].'/page/'.$i)."' class='page larger'>".$i."</a>";
+    					echo "<a href='".site_url('site/blog/'.$category['id_categoria'].'/page/'.$item)."' class='page larger'>".$item."</a>";
     				}
     			}
     		}

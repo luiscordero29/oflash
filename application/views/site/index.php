@@ -282,7 +282,7 @@
 				
                     <ul class='post_list latest_post'>
                         <?php 
-                        foreach($articulos as $a): 
+                        foreach($articles as $a): 
                         ?>
                             <li class="clearfix">
                                 <div class="excerpt">                        
