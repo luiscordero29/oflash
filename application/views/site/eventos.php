@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="ES">
 <head>
+	
 	<base href="<?php echo base_url().'index.php/'.uri_string();?>" />
   	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
   	<meta name="robots" content="index, follow" />
-  	<title>One to One | OFLASH.com.ve</title>
+  	<title><?php echo $category['categoria']; ?> | OFLASH.com.ve</title>
   	<meta name="author" content="OFLASH.com.ve" />
   	<meta property="og:url" content="<?php echo base_url().'index.php/'.uri_string();?>" />
-  	<meta property="og:title" content="Contactanos" />
+  	<meta property="og:title" content="<?php echo $category['categoria']; ?>" />
   	<meta property="og:type" content="article" />
-  	<meta property="og:description" content="Contactanos" />
-  	<meta name="description" content="Contacnanos" />
-  	<meta name="keywords" content="Contactanos" />
-  	<meta name="generator" content="Ing. Luis Cordero - www.luiscordero29.com" />	
+  	<meta property="og:description" content="<?php echo $category['meta_des']; ?>" />
+  	<meta name="description" content="<?php echo $category['meta_des']; ?>" />
+  	<meta name="keywords" content="<?php echo $category['meta_key']; ?>" />
+  	<meta name="generator" content="Ing. Luis Cordero - www.luiscordero29.com" />
 	
 	<link rel="icon" href="<?php echo base_url();?>assets/public/images/favicon.ico" type="image/x-icon" />
 	
@@ -34,7 +35,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/public/css/jquery.fancybox-1.3.4.css" media="screen" />
 
 
-  
+ 
 	<script type="text/javascript">
   	// initialise plugins
 		jQuery(function(){
@@ -99,52 +100,31 @@
 				});				
 			}
 		});
-	</script>  
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-
-			
-			$("a[rel=gallery]").fancybox({
-				'transitionIn'		: 'none',
-				'transitionOut'		: 'none',
-				'titlePosition' 	: 'outside',
-				'overlayColor'		: '#000',
-				'overlayOpacity'	: 0.9,
-				
-
-				'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
-					return '<span id="fancybox-title-over">Foto ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + ' - Todos derechos reservados a www.Oflash.com.ve</span>';
-				}
-			});
-
-			
-		});
-	</script>
-
+	</script> 
 	<script type="text/javascript">
 		$(document).ready(function() {
 
 			$(".politicas").fancybox();
 			
 		});
-	</script>
+	</script> 
   
 	<style type="text/css">
 	/* Body styling options */
-	body { background-color:#f9f9fb}		
+	body { background-color:#212324}		
   	/* Header styling options */
 				
 	/* Links and buttons color */
 				
 	/* Body typography */
 	body 
-	{ 
-		color:#797979;
+	{
+		font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; 
+		color:#797979
 	}
 	#main 
 	{
-		font-size:13px; 
+		font-size:11px; 
 		font-style:normal;
 	}  
 	</style>
@@ -211,68 +191,107 @@
 			</div>        
 
         </header>
+            
+        <div class="container_12 primary_content_wrap clearfix">
 
-		<div class="container_12 primary_content_wrap clearfix">
-
-          
-		<div  id="content" class="grid_12 right">
+        <div id="content" class="grid_8 right">
+        	<div class="header-title">
+	    		<h1><?php echo $category['categoria']; ?></h1>
+    		</div> 
+		    <?php 
+				foreach($table as $r):
+			?>
 			
-			<div id="player"></div>
-			<script>
-		      // 2. This code loads the IFrame Player API code asynchronously.
-		      var tag = document.createElement('script');
+				<article class="post-holder">
+        		<header class="entry-header">
+          			<h2>
+          			<a href="<?php echo site_url("site/post"."/".$r['id_contenido']);?>" title="<?php echo $r['titulo']; ?>" rel="bookmark"><?php echo $r['titulo']; ?></a>
+          			</h2>
+          			<div class="post-meta">Publicado el <time datetime="<?php echo $r['fecha_publicado']; ?>"><?php echo date("d.m.Y", strtotime($r['fecha_publicado'])); ?></time> | CORPORACION OFLASH                 </div><!--.post-meta-->
+          		
+        		</header>
+        		<figure class="featured-thumbnail">
+        			<span class="img-wrap">
+        			<a href="<?php echo site_url("site/post"."/".$r['id_contenido']);?>">
+        				<img width="269" height="124" src="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $r['id_contenido']; ?>/articulo-269x124.jpg" alt="<?php echo $r['titulo']; ?>" title="<?php echo $r['titulo']; ?>" />
+        			</a>
+        			</span>
+        		</figure>                
+        		<div class="post-content">
+		  	        <div class="excerpt"><?php echo   trim(strip_tags($r['resumen'])); ?></div>
+        		</div>
+        		<div class="clear"></div>
+      		</article>
+      		
+      		 <?php endforeach; ?>
+      		  
+ 
+    	<div class='wp-pagenavi'>
+    		
+    	<?php 
+    		$pagination = (int)($table_counts / $table_rows_limit);
+    		for ($item = 0; $item <= $pagination ; $item++) { 
+    			# bucle
+    			if ($item==0) {
+    				if($item==$table_page_current){
+    					echo "<span class='current'>Primera Pág.</span>";	
+    				}else{
+    					echo "<a href='".site_url('eventos/page/'.$item)."' class='page larger'>Primera Pág.</a>";	
+    				}
+    			}elseif($item==$pagination){
+    				if($item==$table_page_current){
+    					echo "<span class='current'>Ultima Pág.</span>";	
+    				}else{
+    					echo "<a href='".site_url('eventos/page/'.$item)."' class='page larger'>Ultima Pág.</a>";	
+    				}    				
+    			}else{    				
+    				if($item==$table_page_current){
+    					echo "<span class='current'>".$item."</span>";	
+    				}else{
+    					echo "<a href='".site_url('eventos/page/'.$item)."' class='page larger'>".$item."</a>";
+    				}
+    			}
+    		}
+    	?>
 
-		      tag.src = "https://www.youtube.com/iframe_api";
-		      var firstScriptTag = document.getElementsByTagName('script')[0];
-		      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    	</div>        <!-- Page navigation -->
 
-		      // 3. This function creates an <iframe> (and YouTube player)
-		      //    after the API code downloads.
-		      var player;
-		      function onYouTubeIframeAPIReady() {
-		        player = new YT.Player('player', {
-		          height: '360',
-		          width: '640',
-		          videoId: 'M7lc1UVf-VE',
-		          events: {
-		            'onReady': onPlayerReady,
-		            'onStateChange': onPlayerStateChange
-		          }
-		        });
-		      }
+	</div>
+<!--  BANNERS PUBLICITARIOS -->
+       <div class="grid_banner_home">
+        <h5>PUBLICIDAD</h5>
+            <a href="http://www.instagram.com/oflash_ve"><img src="<?php echo base_url();?>assets/public/uploads/publicidad/anuncio.jpg" width="220" height="450"></a>
+        </div>
+        <!--
 
-		      // 4. The API will call this function when the video player is ready.
-		      function onPlayerReady(event) {
-		        event.target.playVideo();
-		      }
-
-		      // 5. The API calls this function when the player's state changes.
-		      //    The function indicates that when playing a video (state=1),
-		      //    the player should play for six seconds and then stop.
-		      var done = false;
-		      function onPlayerStateChange(event) {
-		        if (event.data == YT.PlayerState.PLAYING && !done) {
-		          setTimeout(stopVideo, 6000);
-		          done = true;
-		        }
-		      }
-		      function stopVideo() {
-		        player.stopVideo();
-		      }
-		    </script>
-
-		</div>
-
-			
-
-
-
-
-
-      	</div><!--.container-->
+        -->
+        <div class="grid_banner_home">
+            <h5>TWITTER</h5>
+            <a class="twitter-timeline" data-dnt="false" href="https://twitter.com/Oflash_ve" data-widget-id="629558712387112960" data-chrome="noborders transparent" width="220" height="400">Cargando Twitter</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs",omit_script=true);</script>
+        </div>
+        <div>
+            <h5>INSTAGRAM</h5>
+            <script src="//instansive.com/widget/js/instansive.js"></script>
+            <iframe src="//instansive.com/widgets/e64133c1e3ecd0021b6f1c52b92a88fe11bee688.html" id="instansive_e64133c1e3" name="instansive_e64133c1e3"  scrolling="no" allowtransparency="true" class="instansive-widget" style="width:250px ; border: 0; overflow: hidden;">
+            </iframe>
+        </div>
+        <div>
+            <h5>PUBLICIDAD</h5>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Fotografo Profesional -->
+            <ins class="adsbygoogle"
+            style="display:inline-block;width:220px;height:250px"
+            data-ad-client="ca-pub-7875531907871645"
+            data-ad-slot="6585760522"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    <!--FIN DE BANNERS PUBLICITARIOS-->
 
     </div><!--.bg-->
-    <footer id="footer">
+   <footer id="footer">
     	<div class="bootom">
 			<div id="copyright" class="clearfix container_12">
                 
@@ -281,7 +300,7 @@
 						<div class="grid_5 alpha">
 							<div id="footer-text">
 								<div class="logo"> <img src="<?php echo base_url();?>assets/public/images/footer-logo.png" alt="" title=""></div>
-								<div class="footer-content">© Corporacion Oflash C.A. | 2012 -2016</br>
+								<div class="footer-content center">© Corporacion Oflash C.A. | 2012 -2016</br>
                                 <a class="politicas" href="<?php echo base_url(); ?>politicas.txt">Politica y Condiciones de Privacidad</a></div>			
 						  </div>    
 						</div>

@@ -53,8 +53,10 @@ $route['default_controller'] = 'site';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 # custom URL
-$route['eventos'] = 'site/blog/1';
+$route['eventos'] = 'site/eventos';
+$route['eventos/page/(:num)'] = 'site/eventos';
 $route['one-to-one'] = 'site/one_to_one';
-$route['oflash-news'] = 'site/blog/4';
+$route['oflash-news'] = 'site/oflash_news';
+$route['oflash-news/page/(:num)'] = 'site/oflash_news';
 $route['faq'] = 'site/faq';
 $route['contact'] = 'site/contact';

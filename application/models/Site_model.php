@@ -42,9 +42,10 @@ Class Site_model extends CI_MODEL
 	    }
 	}
 
-	function table_articles($limit,$start)
+	function table_articles($limit,$start,$id_category)
 	{
 	    $this->db->order_by('contenidos.fecha_publicado', 'DESC');
+	    $this->db->where('categorias.id_categoria',$id_category);
 	    $this->db->join('categorias', 'contenidos.id_categoria = categorias.id_categoria', 'left');
 	    $query = $this->db->get('contenidos', $start, $limit);
 
@@ -55,8 +56,9 @@ Class Site_model extends CI_MODEL
 	    }
 	}
 
-	function table_articles_counts()
+	function table_articles_counts($id_category)
 	{
+	    $this->db->where('id_categoria',$id_category);
 	    $this->db->from('contenidos');
 	    return $this->db->count_all_results();
 	}

@@ -20,6 +20,49 @@ class Site extends CI_Controller {
 		$this->load->view('site/index',$data);
 	}
 
+	public function eventos()
+	{			
+		# get category = 2
+		$id_category = 1;
+		$data['category'] = $this->Site_model->get_category($id_category);
+
+		# table articles
+		$table_rows_limit = 4;
+		$table_page_current = ($this->uri->segment(3))? $this->uri->segment(3) : 0;		
+		$data['table'] = $this->Site_model->table_articles($table_rows_limit*$table_page_current,$table_rows_limit,$id_category);
+		$data['table_counts'] = $this->Site_model->table_articles_counts($id_category);
+		$data['table_page_current'] = $table_page_current;
+		$data['table_rows_limit'] = $table_rows_limit;
+		
+		$this->load->view('site/eventos', $data);
+		/*
+		if ($data['table_counts']>0){
+		}else{
+			show_404();
+		}*/
+	}
+
+	public function oflash_news()
+	{			
+		# get category = 4
+		$id_category = 4;
+		$data['category'] = $this->Site_model->get_category($id_category);
+
+		# table articles
+		$table_rows_limit = 4;
+		$table_page_current = ($this->uri->segment(3))? $this->uri->segment(3) : 0;		
+		$data['table'] = $this->Site_model->table_articles($table_rows_limit*$table_page_current,$table_rows_limit,$id_category);
+		$data['table_counts'] = $this->Site_model->table_articles_counts($id_category);
+		$data['table_page_current'] = $table_page_current;
+		$data['table_rows_limit'] = $table_rows_limit;
+		
+		if ($data['table_counts']>0){
+			$this->load->view('site/oflash_news', $data);
+		}else{
+			show_404();
+		}
+	}
+
 	public function blog($id_category=false)
 	{			
 		if($id_category===FALSE){
@@ -44,23 +87,22 @@ class Site extends CI_Controller {
 		}
 	}
 
-	public function post($id_articulo=false)
+	public function post($id_article=false)
 	{
 		$this->load->helper('directory');
 
-		if($id_articulo===FALSE)
+		if($id_article===FALSE)
 		{
 			show_404();
 		}
 
-		$data['articulo'] = $this->Site_model->get_articulo($id_articulo);
-		$data['categorias'] = $this->Site_model->categorias();
+		$data['article'] = $this->Site_model->get_article($id_article);
 		
-		if (empty($data['articulo']))
+		if (!$data['article'])
 		{
 			show_404();
 		}
-		
+
 		$this->load->view('site/post', $data);
 
 	}
@@ -142,8 +184,6 @@ class Site extends CI_Controller {
 
 	public function one_to_one()
 	{		
-			$data['categorias'] = $this->Site_model->categorias();		
-			$this->load->view('site/one_to_one',$data);
-		
+		$this->load->view('site/one_to_one');
 	}
 }
