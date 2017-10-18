@@ -4,14 +4,14 @@
 	<base href="<?php echo base_url().'index.php/'.uri_string();?>" />
   	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
   	<meta name="robots" content="index, follow" />
-  	<title><?php echo $articulo['titulo']; ?> | OFLASH.com.ve</title>
+  	<title><?php echo $article['titulo']; ?> | OFLASH.com.ve</title>
   	<meta name="author" content="OFLASH.com.ve" />
   	<meta property="og:url" content="<?php echo base_url().'index.php/'.uri_string();?>" />
-  	<meta property="og:title" content="<?php echo $articulo['titulo']; ?>" />
+  	<meta property="og:title" content="<?php echo $article['titulo']; ?>" />
   	<meta property="og:type" content="article" />
-  	<meta property="og:description" content="<?php echo $articulo['meta_des']; ?>" />
-  	<meta name="description" content="<?php echo $articulo['meta_des']; ?>" />
-  	<meta name="keywords" content="<?php echo $articulo['meta_key']; ?>" />
+  	<meta property="og:description" content="<?php echo $article['meta_des']; ?>" />
+  	<meta name="description" content="<?php echo $article['meta_des']; ?>" />
+  	<meta name="keywords" content="<?php echo $article['meta_key']; ?>" />
   	<meta name="generator" content="Ing. Luis Cordero - www.luiscordero29.com" />	
 	
 	<link rel="icon" href="<?php echo base_url();?>assets/public/images/favicon.ico" type="image/x-icon" />
@@ -211,21 +211,21 @@
 	    	<div class="post">
 	    	<article class="post-holder single-post">
         		<header class="entry-header">
-          			<h1 class="banner-title"><?php echo $articulo['titulo']; ?></h1>
+          			<h1 class="banner-title"><?php echo $article['titulo']; ?></h1>
 		  			<div class="post-meta">
-		  				<time datetime="<?php echo $articulo['fecha_publicado']; ?>"><?php echo date("d/m/Y", strtotime($articulo['fecha_publicado'])); ?></time>
+		  				<time datetime="<?php echo $article['fecha_publicado']; ?>"><?php echo date("d/m/Y", strtotime($article['fecha_publicado'])); ?></time>
           			</div><!--.post-meta-->
                 </header>
 			
 			<figure class="featured-thumbnail large">
 				<span class="img-wrap">
-				<img width="540" height="200" src="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $articulo['id_contenido']; ?>/articulo-540x200.jpg" alt="<?php echo $articulo['titulo']; ?>" title="<?php echo $articulo['titulo']; ?>" />
+				<img width="540" height="200" src="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $article['id_contenido']; ?>/articulo-540x200.jpg" alt="<?php echo $article['titulo']; ?>" title="<?php echo $article['titulo']; ?>" />
 				</span>
 				<span class="clear"></span>
 			</figure>                
 
 			<div class="post-content">
-          		<?php echo $articulo['contenido']; ?>
+          		<?php echo $article['contenido']; ?>
           	</div>
       		</article>
 
@@ -247,7 +247,7 @@
 	    	<div class="grid_8">
 			<div id="gallery-post">
 			<?php 
-				$p = './assets/public/uploads/articulos/'.$articulo['id_contenido'].'/gallery/';				
+				$p = './assets/public/uploads/articulos/'.$article['id_contenido'].'/gallery/';				
 				$gallery = directory_map($p, FALSE, TRUE);				
 			?>
 			<ul>
@@ -259,8 +259,8 @@
 					?>
     				<li class="gp-li">
             			<div>
-				  			<a rel="gallery" href="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $articulo['id_contenido']; ?>/gallery/<?php echo $value; ?>" title="">
-				  			<img width="150" height="100" alt="" src="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $articulo['id_contenido']; ?>/tb/<?php echo $value; ?>" /></a>
+				  			<a rel="gallery" href="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $article['id_contenido']; ?>/gallery/<?php echo $value; ?>" title="">
+				  			<img width="150" height="100" alt="" src="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $article['id_contenido']; ?>/tb/<?php echo $value; ?>" /></a>
   				  		</div>  				  			
 					</li>
 					<?php endforeach; ?>

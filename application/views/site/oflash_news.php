@@ -205,14 +205,14 @@
 				<article class="post-holder">
         		<header class="entry-header">
           			<h2>
-          			<a href="<?php echo site_url("site/post"."/".$r['id_contenido']);?>" title="<?php echo $r['titulo']; ?>" rel="bookmark"><?php echo $r['titulo']; ?></a>
+          			<a href="<?php echo site_url("post/".url_title($r['titulo'])."/".$r['id_contenido']);?>" title="<?php echo $r['titulo']; ?>" rel="bookmark"><?php echo $r['titulo']; ?></a>
           			</h2>
           			<div class="post-meta">Publicado el <time datetime="<?php echo $r['fecha_publicado']; ?>"><?php echo date("d.m.Y", strtotime($r['fecha_publicado'])); ?></time> | CORPORACION OFLASH                 </div><!--.post-meta-->
           		
         		</header>
         		<figure class="featured-thumbnail">
         			<span class="img-wrap">
-        			<a href="<?php echo site_url("site/post"."/".$r['id_contenido']);?>">
+        			<a href="<?php echo site_url("post/".url_title($r['titulo'])."/".$r['id_contenido']);?>">
         				<img width="269" height="124" src="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $r['id_contenido']; ?>/articulo-269x124.jpg" alt="<?php echo $r['titulo']; ?>" title="<?php echo $r['titulo']; ?>" />
         			</a>
         			</span>

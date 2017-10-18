@@ -58,5 +58,6 @@ $route['eventos/page/(:num)'] = 'site/eventos';
 $route['one-to-one'] = 'site/one_to_one';
 $route['oflash-news'] = 'site/oflash_news';
 $route['oflash-news/page/(:num)'] = 'site/oflash_news';
+$route['post/(:any)/(:num)'] = 'site/post/$2';
 $route['faq'] = 'site/faq';
 $route['contact'] = 'site/contact';

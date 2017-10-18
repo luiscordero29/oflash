@@ -63,79 +63,45 @@ Class Site_model extends CI_MODEL
 	    return $this->db->count_all_results();
 	}
 
-	function login($username, $password)
+	function get_article($id_article)
 	{
-	    
-	    $this->db->select('id_admin, nick, user ');
-	    $this->db->from('admins');
-	    $this->db->where('user', $username);
-	    $this->db->where('pass', MD5($password));
-	    $this->db->limit(1);
-
-	    $query = $this->db->get();
-
-	    if($query->num_rows() == 1)
-	    {
-	      return $query->result();
-	    }
-	    else
-	    {
-	      return false;
-	    }
-	} 
-
-
-
-	function get_blog_rows($id_categoria)
-	{
-	    
-	    $sql = "
-	    	SELECT a.*, c.categoria FROM
-	    	contenidos a 
-	    	LEFT JOIN categorias c ON c.id_categoria = a.id_categoria
-	    	WHERE
-	    	c.id_categoria = ".$id_categoria;
-
-	    $query = $this->db->query($sql);
-
-	    if($query->num_rows() > 0)
-	    {
-	      return $query->num_rows();
-	    }
-	    else
-	    {
-	      return false;
+	    $this->db->where('id_contenido', $id_article);
+	    $this->db->join('categorias', 'contenidos.id_categoria = categorias.id_categoria', 'left');
+	    $query = $this->db->get('contenidos');
+	    if($query->num_rows() > 0){
+	      	return $query->row_array();
+	    }else{
+	      	return false;
 	    }
 	}
 
-
-	function get_blog($id_categoria,$limit,$start)
+	function contact()
 	{
-	    
-	    $sql = "
-	    	SELECT a.*, c.categoria FROM
-	    	contenidos a 
-	    	LEFT JOIN categorias c ON c.id_categoria = a.id_categoria
-	    	WHERE
-	    	c.id_categoria = ".$id_categoria."
-	    	ORDER BY a.fecha_publicado DESC 
-	    	LIMIT ".$limit.",".$start;
+      	$this->load->library("email");    
+		
+		$name = $this->input->post('name');
+        $email = $this->input->post('email');
+        $phone = $this->input->post('phone');
+        $comment = $this->input->post('comment');
+        	
+        # Send Mail
+        $this->email->from($email, $name.' - tel: '.$phone);
+        $this->email->to('info@oflash.com.ve');
+        $this->email->cc('info@luiscordero29.com');
+        $this->email->subject('Contacto Homa Page');
+        $this->email->message($comment);
+        $this->email->send();
 
-	    $query = $this->db->query($sql);
+        $data['success'] = 
+			array( 
+				'Envio de Mensaje',				
+			);
 
-	    if($query->num_rows() > 0)
-	    {
-	      return $query->result_array();
-	    }
-	    else
-	    {
-	      return false;
-	    }
+		return $data;
 	}
 
-	function get_blog_search()
+	function get_search()
 	{
-	    
 	    $s = $this->input->post('s');
 	    $sql = "
 	    	SELECT a.*, c.categoria FROM
@@ -148,39 +114,10 @@ Class Site_model extends CI_MODEL
 
 	    $query = $this->db->query($sql);
 
-	    if($query->num_rows() > 0)
-	    {
-	      return $query->result_array();
-	    }
-	    else
-	    {
-	      return false;
+	    if($query->num_rows() > 0){
+	      	return $query->result_array();
+	    }else{
+	      	return false;
 	    }
 	}
-
-	
-
-	function get_articulo($id_articulo)
-	{
-	    
-	    $sql = "
-	    	SELECT a.*, c.categoria FROM
-	    	contenidos a 
-	    	LEFT JOIN categorias c ON c.id_categoria = a.id_categoria
-	    	WHERE 
-	    	a.id_contenido = ".$id_articulo;
-
-	    $query = $this->db->query($sql);
-
-	    if($query->num_rows() > 0)
-	    {
-	      return $query->row_array();
-	    }
-	    else
-	    {
-	      return false;
-	    }
-	}
-
-
 }
