@@ -167,7 +167,7 @@
                 <div id="top-search">
                     
                     <?php            
-                    echo form_open('site/search');
+                    echo form_open('search');
                     ?>
                     
                         <div class="bg-form">

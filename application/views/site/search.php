@@ -167,7 +167,7 @@
                 <div id="top-search">
                     
                     <?php            
-                    echo form_open('site/search');
+                    echo form_open('search');
                     ?>
                     
                         <div class="bg-form">
@@ -198,29 +198,29 @@
 	    		<h1>Resultado de la busqueda</h1>
     		</div> 
 		    <?php 
-		    	if($articulos){
-				foreach($articulos as $a): 
+		    	if($articles){
+				foreach($articles as $r): 
 			?>
 		    <article class="post-holder">
         		<header class="entry-header">
           			<h2>
-          			<a href="<?php echo site_url("site/post"."/".$a['id_contenido']);?>" title="<?php echo $a['titulo']; ?>" rel="bookmark"><?php echo $a['titulo']; ?></a>
+          			<a href="<?php echo site_url("post/".url_title($r['titulo'])."/".$r['id_contenido']);?>" title="<?php echo $r['titulo']; ?>" rel="bookmark"><?php echo $r['titulo']; ?></a>
           			</h2>
-          			<div class="post-meta">Publicado el <time datetime="<?php echo $a['fecha_publicado']; ?>"><?php echo date("d.m.Y", strtotime($a['fecha_publicado'])); ?></time>                 </div><!--.post-meta-->
+          			<div class="post-meta">Publicado el <time datetime="<?php echo $r['fecha_publicado']; ?>"><?php echo date("d.m.Y", strtotime($r['fecha_publicado'])); ?></time> | CORPORACION OFLASH                 </div><!--.post-meta-->
           		
         		</header>
         		<figure class="featured-thumbnail">
         			<span class="img-wrap">
-        			<a href="<?php echo site_url("site/post"."/".$a['id_contenido']);?>">
-        				<img width="269" height="124" src="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $a['id_contenido']; ?>/articulo-269x124.jpg" alt="<?php echo $a['titulo']; ?>" title="<?php echo $a['titulo']; ?>" />
+        			<a href="<?php echo site_url("post/".url_title($r['titulo'])."/".$r['id_contenido']);?>">
+        				<img width="269" height="124" src="<?php echo base_url();?>assets/public/uploads/articulos/<?php echo $r['id_contenido']; ?>/articulo-269x124.jpg" alt="<?php echo $r['titulo']; ?>" title="<?php echo $r['titulo']; ?>" />
         			</a>
         			</span>
         		</figure>                
         		<div class="post-content">
-		  	        <div class="excerpt"><?php echo   trim(strip_tags($a['resumen'])); ?></div>
+		  	        <div class="excerpt"><?php echo   trim(strip_tags($r['resumen'])); ?></div>
         		</div>
         		<div class="clear"></div>
-      		</article> 
+      		</article>
       		<?php endforeach; }else{ ?>   
       		<article class="post-holder">
         		<header class="entry-header">
@@ -234,6 +234,36 @@
         		<div class="clear"></div>
       		</article>   
         	<?php } ?>   
+
+        	<div class='wp-pagenavi'>
+    		
+    	<?php 
+    		$pagination = (int)($table_counts / $table_rows_limit);
+    		for ($item = 0; $item <= $pagination ; $item++) { 
+    			# bucle
+    			if ($item==0) {
+    				if($item==$table_page_current){
+    					echo "<span class='current'>Primera Pág.</span>";	
+    				}else{
+    					echo "<a href='".site_url('oflash-news/page/'.$item)."' class='page larger'>Primera Pág.</a>";	
+    				}
+    			}elseif($item==$pagination){
+    				if($item==$table_page_current){
+    					echo "<span class='current'>Ultima Pág.</span>";	
+    				}else{
+    					echo "<a href='".site_url('oflash-news/page/'.$item)."' class='page larger'>Ultima Pág.</a>";	
+    				}    				
+    			}else{    				
+    				if($item==$table_page_current){
+    					echo "<span class='current'>".$item."</span>";	
+    				}else{
+    					echo "<a href='".site_url('oflash-news/page/'.$item)."' class='page larger'>".$item."</a>";
+    				}
+    			}
+    		}
+    	?>
+
+    	</div>        <!-- Page navigation -->
 
 
 	</div>

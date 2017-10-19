@@ -100,24 +100,31 @@ Class Site_model extends CI_MODEL
 		return $data;
 	}
 
-	function get_search()
+	function table_articles_search($limit,$start)
 	{
 	    $s = $this->input->post('s');
-	    $sql = "
-	    	SELECT a.*, c.categoria FROM
-	    	contenidos a 
-	    	LEFT JOIN categorias c ON c.id_categoria = a.id_categoria
-	    	WHERE
-	    	titulo LIKE '%".$s."%' OR resumen LIKE '%".$s."%' OR contenido LIKE '%".$s."%'
-	    	ORDER BY a.fecha_publicado DESC 
-	    	";
-
-	    $query = $this->db->query($sql);
+	    
+	    $this->db->order_by('contenidos.fecha_publicado', 'DESC');
+	    $this->db->like('contenidos.titulo',$s);
+	    $this->db->or_like('contenidos.resumen',$s);
+	    $this->db->or_like('contenidos.contenido',$s);
+	    $this->db->join('categorias', 'contenidos.id_categoria = categorias.id_categoria', 'left');
+	    $query = $this->db->get('contenidos', $start, $limit);
 
 	    if($query->num_rows() > 0){
 	      	return $query->result_array();
 	    }else{
 	      	return false;
 	    }
+	}
+
+	function table_articles_search_counts()
+	{
+	    $s = $this->input->post('s');
+	    $this->db->like('contenidos.titulo',$s);
+	    $this->db->or_like('contenidos.resumen',$s);
+	    $this->db->or_like('contenidos.contenido',$s);
+	    $this->db->from('contenidos');
+	    return $this->db->count_all_results();
 	}
 }

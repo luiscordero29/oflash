@@ -61,3 +61,4 @@ $route['oflash-news/page/(:num)'] = 'site/oflash_news';
 $route['post/(:any)/(:num)'] = 'site/post/$2';
 $route['faq'] = 'site/faq';
 $route['contact'] = 'site/contact';
+$route['search'] = 'site/search';
