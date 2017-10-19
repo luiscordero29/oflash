@@ -235,35 +235,7 @@
       		</article>   
         	<?php } ?>   
 
-        	<div class='wp-pagenavi'>
-    		
-    	<?php 
-    		$pagination = (int)($table_counts / $table_rows_limit);
-    		for ($item = 0; $item <= $pagination ; $item++) { 
-    			# bucle
-    			if ($item==0) {
-    				if($item==$table_page_current){
-    					echo "<span class='current'>Primera Pág.</span>";	
-    				}else{
-    					echo "<a href='".site_url('oflash-news/page/'.$item)."' class='page larger'>Primera Pág.</a>";	
-    				}
-    			}elseif($item==$pagination){
-    				if($item==$table_page_current){
-    					echo "<span class='current'>Ultima Pág.</span>";	
-    				}else{
-    					echo "<a href='".site_url('oflash-news/page/'.$item)."' class='page larger'>Ultima Pág.</a>";	
-    				}    				
-    			}else{    				
-    				if($item==$table_page_current){
-    					echo "<span class='current'>".$item."</span>";	
-    				}else{
-    					echo "<a href='".site_url('oflash-news/page/'.$item)."' class='page larger'>".$item."</a>";
-    				}
-    			}
-    		}
-    	?>
-
-    	</div>        <!-- Page navigation -->
+        	
 
 
 	</div>

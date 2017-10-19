@@ -96,7 +96,8 @@ class Site extends CI_Controller {
 		if($this->form_validation->run() == FALSE){
 			$this->index();		
 		}else{
-			$data['articles'] = $this->Site_model->get_search();				
+			# table articles
+			$data['articles'] = $this->Site_model->table_articles_search();		
 			$this->load->view('site/search', $data);
 		}
 	}
