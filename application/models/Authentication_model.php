@@ -6,10 +6,10 @@ Class Authentication_model extends CI_MODEL
 		parent::__construct();
 	}
 
-	public function check_usuario()
+	public function check_email()
 	{
-		$dus_usuario = $this->input->post('dus_usuario');
-		$query = $this->db->get_where('usuarios', array('dus_usuario' => $dus_usuario));
+		$user_email = $this->input->post('user_email');
+		$query = $this->db->get_where('users', array('user_email' => $user_email));
 	    if($query->num_rows() > 0){
 	    	return true;
 	    }else{
@@ -17,11 +17,11 @@ Class Authentication_model extends CI_MODEL
 	    }
 	}
 
-	public function check_clave()
+	public function check_password()
 	{
-		$dus_usuario = $this->input->post('dus_usuario');
-		$dus_clave = hash('sha512', $this->input->post('dus_clave'));
-		$query = $this->db->get_where('usuarios', array('dus_usuario' => $dus_usuario,'dus_clave' => $dus_clave));
+		$user_email = $this->input->post('user_email');
+		$user_password = hash('sha512', $this->input->post('user_password'));
+		$query = $this->db->get_where('users', array('user_email' => $user_email,'user_password' => $user_password));
 	    if($query->num_rows() > 0){
 	    	return true;
 	    }else{
@@ -31,16 +31,13 @@ Class Authentication_model extends CI_MODEL
 
 	public function check_authentication()
 	{
-		$dus_usuario = $this->input->post('dus_usuario');
-		$query = $this->db->get_where('usuarios', array('dus_usuario' => $dus_usuario, 'dus_estatus' => 'SI'));
+		$user_email = $this->input->post('user_email');
+		$query = $this->db->get_where('users', array('user_email' => $user_email, 'user_status' => 'yes'));
 	    if($query->num_rows() > 0){
 	    	$r = $query->row_array();
 	    	$sess_array = array(
-		        'dus_id' 		=> $r['dus_id'],
-		        'dus_usuario' 	=> $r['dus_usuario'],		          	
-		        'dus_email' 	=> $r['dus_email'],		          	
-		        'dus_apellidos' => $r['dus_apellidos'],		          	
-		        'dus_nombres' 	=> $r['dus_nombres'],		          	
+		        'user_uid' 		=> $r['user_uid'],
+		        'user_email' 	=> $r['user_email'],		          	          	
 		    );
 	        $this->session->set_userdata($sess_array);
 	    	return true;
@@ -51,32 +48,24 @@ Class Authentication_model extends CI_MODEL
 
 	public function register()
 	{
-		# registro
-		$dus_identidad 		= $this->input->post('dus_identidad');
-	    $dus_apellidos 		= $this->input->post('dus_apellidos');
-	   	$dus_nombres 		= $this->input->post('dus_nombres');
-	   	$dus_telefono 		= $this->input->post('dus_telefono');
-	   	$dus_direccion 		= $this->input->post('dus_direccion');	   	
-	   	$dus_usuario 		= $this->input->post('dus_usuario');	   	
-	   	$dus_email 			= $this->input->post('dus_email');	   	
-	    $dus_clave 			= hash('sha512', $this->input->post('dus_clave'));
-	    $dus_estatus 		= 'NO';
-	    $dus_ruta 			= hash('sha512', $this->input->post('dus_email'));	   
+		# register	   	
+	   	$user_uid 			= $this->uuid->v5(uniqid());	   	
+	   	$user_email 		= $this->input->post('user_email');	   	
+	    $user_password 		= hash('sha512', $this->input->post('user_password'));
+	    $user_status 		= 'no';
+	    $user_validated 	= 'no';
+	    $user_route 		= $this->uuid->v5(uniqid());   
 	   	   	
 	   	$data = array(
-			'dus_identidad' 	=> $dus_identidad,
-			'dus_apellidos' 	=> $dus_apellidos,
-			'dus_nombres' 		=> $dus_nombres,
-			'dus_telefono' 		=> $dus_telefono,
-			'dus_direccion' 	=> $dus_direccion,
-			'dus_usuario' 		=> $dus_usuario,
-			'dus_email' 		=> $dus_email,
-			'dus_clave' 		=> $dus_clave,	  
-			'dus_estatus' 		=> $dus_estatus,	  
-			'dus_ruta' 			=> $dus_ruta,	  
+			'user_uid' 			=> $user_uid,
+			'user_email' 		=> $user_email,	  
+			'user_password' 	=> $user_password,	  
+			'user_status' 		=> $user_status,	  
+			'user_validated' 	=> $user_validated,	  
+			'user_route' 		=> $user_route,	  
 		);
 
-		$this->db->insert('usuarios', $data);
+		$this->db->insert('users', $data);
 
 		$data['alert']['success'] = 
 			array( 
@@ -84,17 +73,17 @@ Class Authentication_model extends CI_MODEL
 			);
 
 		# email
-		$to = $dus_email;
-		$from = 'informatica@dirsaludbarinas.gob.ve';
-		$subject = 'Registro de Usuario - Sistema Integral de Salud';
-		$message  = '<p>Bienvenido al Sistema Integral de Salud, a continuación le enviamos sus datos de acceso</p>';
-		$message .= '<p><b>USUARIO:</b> '.$dus_usuario.'</p>';
-		$message .= '<p><b>CLAVE:</b> '.$this->input->post('dus_clave').'</p>';
-		$message .= '<p><b>LINK DE VALIDACION:</b> <a href="'.site_url('authentication/validation/'.$dus_ruta).'">Enlace de Validar Cuenta</a></p>';
-		$message .= '<p><b>Antes de ingresar debes validar la cuenta haciendo clic en el enlace anterior</b></p>';
-
-		$this->load->model('Email_model');
-		$this->Email_model->send($to,$from,$subject,$message);
+		$to = $user_email;
+		$from = 'info@oflash.com.ve';
+		$data['title'] = 'Registro de Usuario';
+		$data['content']  = '<p>Bienvenido al Sistema Integral de Salud, a continuación le enviamos sus datos de acceso</p>';
+		$data['content'] .= '<p><b>E-MAIL:</b> '.$user_email.'</p>';
+		$data['content'] .= '<p><b>CLAVE:</b> '.$this->input->post('user_password').'</p>';
+		$data['content'] .= '<p><b>LINK DE VALIDACION:</b> <a href="'.site_url('authentication/validation/'.$user_route).'">Enlace de Validar Cuenta</a></p>';
+		$data['content'] .= '<p><b>Antes de ingresar debes validar la cuenta haciendo clic en el enlace anterior</b></p>';
+		$subject = $data['title'];
+		$message = $this->load->view('authentication/email', $data, TRUE);
+		$this->email->send($to,$from,$subject,$message);
 
 		$data['alert']['info'] = 
 			array( 

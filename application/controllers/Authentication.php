@@ -6,7 +6,7 @@ class Authentication extends CI_Controller {
 	/**
 	 * Authentication.
 	 *
-	 * author: Ing. Luis Cordero
+	 * author: Luis Cordero
 	 * site: http://luiscordero29.com/
 	 * mail: info@luiscordero29.com
 	 *
@@ -16,7 +16,7 @@ class Authentication extends CI_Controller {
 	{
 		parent::__construct();		
 		$this->load->model('Authentication_model');
-		if($this->session->has_userdata('dus_id'))
+		if($this->session->has_userdata('user_uid'))
    		{     						
 		    //If no session, redirect to login page
 		    redirect('dashboard');
@@ -26,11 +26,11 @@ class Authentication extends CI_Controller {
 	public function index()
 	{
 		# rules
-		$this->form_validation->set_rules('dus_usuario', 'Usuario', 'required');
-		$this->form_validation->set_rules('dus_clave', 'Contraseña', 'required|callback_check_usuario|callback_check_clave|callback_check_authentication|callback_check_authentication');
+		$this->form_validation->set_rules('user_email', 'E-mail', 'required|valid_email');
+		$this->form_validation->set_rules('user_password', 'Contraseña', 'required|callback_check_usuario|callback_check_clave|callback_check_authentication|callback_check_authentication');
 		# message
-		$this->form_validation->set_message('check_usuario', 'El Usuario ó Email no existe');
-		$this->form_validation->set_message('check_clave', 'Contraseña invalidad');
+		$this->form_validation->set_message('check_email', 'El Usuario ó Email no existe');
+		$this->form_validation->set_message('check_password', 'Contraseña invalidad');
 		$this->form_validation->set_message('check_authentication', 'No tiene acceso temporalmente');
 		# views
 		if ($this->form_validation->run() == FALSE)
@@ -41,14 +41,14 @@ class Authentication extends CI_Controller {
 		}
 	}
 
-	public function check_usuario()
+	public function check_email()
 	{
-		return $this->Authentication_model->check_usuario();
+		return $this->Authentication_model->check_email();
 	}
 
-	public function check_clave()
+	public function check_password()
 	{
-		return $this->Authentication_model->check_clave();
+		return $this->Authentication_model->check_password();
 	}
 
 	public function check_authentication()
@@ -59,15 +59,9 @@ class Authentication extends CI_Controller {
 	public function register()
 	{
 		# rules
-		$this->form_validation->set_rules('dus_identidad', 'Cedula de Identidad', 'trim|required|is_natural_no_zero|min_length[6]|max_length[9]|is_unique[usuarios.dus_identidad]');
-		$this->form_validation->set_rules('dus_apellidos', 'Apellidos', 'trim|required');
-		$this->form_validation->set_rules('dus_nombres', 'Nombres', 'trim|required');
-		$this->form_validation->set_rules('dus_telefono', 'Teléfono', 'trim|required|is_natural');
-		$this->form_validation->set_rules('dus_direccion', 'Dirección', 'trim|required');
-		$this->form_validation->set_rules('dus_usuario', 'Usuario', 'trim|required|alpha_numeric|min_length[6]|max_length[15]|is_unique[usuarios.dus_usuario]');
-		$this->form_validation->set_rules('dus_email', 'E-mail', 'trim|required|is_unique[usuarios.dus_email]|valid_email');
-		$this->form_validation->set_rules('dus_clave', 'Clave', 'required');
-		$this->form_validation->set_rules('dus_clave_repetir', 'Repetir Clave', 'required|matches[dus_clave]');
+		$this->form_validation->set_rules('user_email', 'E-mail', 'trim|required|is_unique[users.user_email]|valid_email');
+		$this->form_validation->set_rules('user_password', 'Clave', 'required');
+		$this->form_validation->set_rules('user_password_matches', 'Repetir Clave', 'required|matches[user_password]');
 		# views
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -78,25 +72,25 @@ class Authentication extends CI_Controller {
 		}
 	}
 
-	public function passwordrecovery()
+	public function password_recovery()
 	{
 		# rules
-		$this->form_validation->set_rules('dus_email', 'E-mail', 'trim|required|callback_check_passwordrecovery|valid_email');
+		$this->form_validation->set_rules('user_email', 'E-mail', 'trim|required|valid_email|callback_check_password_recovery');
 		# message
-		$this->form_validation->set_message('check_passwordrecovery', 'El Email no existe');
+		$this->form_validation->set_message('check_password_recovery', 'El Email no existe');
 		# views
 		if ($this->form_validation->run() == FALSE)
 		{
-			$this->load->view('authentication/passwordrecovery');	
+			$this->load->view('authentication/password_recovery');	
 		}else{	
-			$data = $this->Authentication_model->passwordrecovery();
-	        $this->load->view('authentication/passwordrecovery_alerts',$data);
+			$data = $this->Authentication_model->password_recovery();
+	        $this->load->view('authentication/password_recovery_alerts',$data);
 		}
 	}
 
-	public function check_passwordrecovery()
+	public function check_password_recovery()
 	{
-		return $this->Authentication_model->check_passwordrecovery();
+		return $this->Authentication_model->check_password_recovery();
 	}
 
 	public function validation($dus_ruta)

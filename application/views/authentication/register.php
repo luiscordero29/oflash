@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Registrarse | Sistema Integral de Salud</title>
+    <title>Content Manager System | Registrarse</title>
+    <meta name="generator" content="Luis Cordero - http://luiscordero29.com/" />   
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -16,7 +17,6 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/css/AdminLTE.css'); ?>">
     <!-- iCheck -->
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/iCheck/square/blue.css'); ?>">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -27,7 +27,7 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="<?php echo site_url(); ?>">Sistema Integral de Salud</a>
+            <a href="<?php echo site_url(); ?>">Content Manager System</a>
         </div>
 
         <div class="register-box-body">
@@ -35,52 +35,11 @@
             <hr>
             <?php echo form_open(); ?>
                 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?> 
+                
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">                        
+                    <div class="ol-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="form-group has-feedback">
-                            <input type="text" name="dus_identidad" class="form-control" placeholder="Cedula de Identidad *" autofocus="" autocomplete="off" maxlength="20" value="<?php echo set_value('dus_identidad'); ?>">
-                            <span class="fa fa-address-card form-control-feedback"></span>
-                        </div>
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">   
-                        <div class="form-group has-feedback">
-                            <input type="text" name="dus_apellidos" class="form-control" placeholder="Apellidos *" autocomplete="off" maxlength="60" value="<?php echo set_value('dus_apellidos'); ?>">
-                            <span class="fa fa-address-card form-control-feedback"></span>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> 
-                        <div class="form-group has-feedback">
-                            <input type="text" name="dus_nombres" class="form-control" placeholder="Nombres" autocomplete="off" maxlength="60" value="<?php echo set_value('dus_nombres'); ?>">
-                            <span class="fa fa-address-card form-control-feedback"></span>
-                        </div>
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <div class="form-group has-feedback">
-                            <input type="text" name="dus_telefono" class="form-control" placeholder="Teléfono *" autocomplete="off" maxlength="30" value="<?php echo set_value('dus_telefono'); ?>">
-                            <span class="fa fa-address-card form-control-feedback"></span>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <div class="form-group has-feedback">
-                            <input type="text" name="dus_direccion" class="form-control" placeholder="Dirección *" autocomplete="off" maxlength="250" value="<?php echo set_value('dus_direccion'); ?>">
-                            <span class="fa fa-address-card form-control-feedback"></span>
-                        </div>
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="ol-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="form-group has-feedback">
-                            <input type="text" name="dus_usuario" class="form-control" placeholder="Usuario *" autocomplete="off" maxlength="15" value="<?php echo set_value('dus_usuario'); ?>">
-                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                        </div>
-                    </div>
-                    <div class="ol-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="form-group has-feedback">
-                            <input type="email" name="dus_email" class="form-control" placeholder="Email *" autocomplete="off" maxlength="255" value="<?php echo set_value('dus_email'); ?>">
+                            <input type="email" name="user_email" class="form-control" placeholder="Email *" autocomplete="off" maxlength="300" value="<?php echo set_value('user_email'); ?>">
                             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         </div>
                     </div>
@@ -88,13 +47,13 @@
                 <div class="row">
                     <div class="ol-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group has-feedback">
-                            <input type="password" name="dus_clave" class="form-control" placeholder="Clave">
+                            <input type="password" name="user_password" class="form-control" placeholder="Clave">
                             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         </div>
                     </div>
                     <div class="ol-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group has-feedback">
-                            <input type="password" name="dus_clave_repetir" class="form-control" placeholder="Repetir Clave">
+                            <input type="password" name="user_password_matches" class="form-control" placeholder="Repetir Clave">
                             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                         </div>
                     </div>

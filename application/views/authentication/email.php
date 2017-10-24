@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Recuperar Clave | Sistema Integral de Salud | Dirección Regional de Salud Barinas</title>
+    <title>Content Manager System | E-mail</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -24,44 +24,20 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="<?php echo site_url(); ?>">Sistema Integral de Salud</a>
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="<?php echo site_url(); ?>">Content Manager Systemd</a>
         </div>
-        <!-- /.login-logo -->
-        <div class="login-box-body">
-            <h4 class="text-center">Recuperar Clave</h4>
-            <hr>
-            <?php 
-                if (!empty($alert['success'])) {
-                    foreach ($alert['success'] as $key => $value) { 
-                        echo '<div class="alert alert-success">'.$value.'</div>';
-                    }
-                } 
-                if (!empty($alert['info'])) {
-                    foreach ($alert['info'] as $key => $value) { 
-                        echo '<div class="alert alert-info">'.$value.'</div>';
-                    }
-                }
-                if (!empty($alert['warning'])) {
-                    foreach ($alert['warning'] as $key => $value) { 
-                        echo '<div class="alert alert-warning">'.$value.'</div>';
-                    }
-                }
-                if (!empty($alert['danger'])) {
-                    foreach ($alert['danger'] as $key => $value) { 
-                        echo '<div class="alert alert-danger">'.$value.'</div>';
-                    }
-                }               
-            ?>
-            <hr>
-            <a href="<?php echo site_url('authentication/index'); ?>" class="text-center">Tengo una cuenta</a>
 
+        <div class="register-box-body">
+            <h4 class="text-center"><?php echo $title; ?></h4>
+            <hr>
+            <?php echo $content; ?>
         </div>
-        <!-- /.login-box-body -->
+        <!-- /.form-box -->
     </div>
-    <!-- /.login-box -->
+    <!-- /.register-box -->
 
     <!-- jQuery 2.2.3 -->
     <script src="<?php echo base_url('assets/plugins/jQuery/jquery-2.2.3.min.js'); ?>"></script>

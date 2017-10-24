@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Registrarse | Sistema Integral de Salud</title>
+    <title>Content Manager System | Registrarse</title>
+    <meta name="generator" content="Luis Cordero - http://luiscordero29.com/" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -27,7 +28,7 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="<?php echo site_url(); ?>">Sistema Integral de Salud</a>
+            <a href="<?php echo site_url(); ?>">Content Manager System</a>
         </div>
 
         <div class="register-box-body">
