@@ -143,11 +143,9 @@ class Site extends CI_Controller {
 		
 	}
 
-	public function one_to_one()
+	public function _404()
 	{		
-			$data['categorias'] = $this->site_model->categorias();		
-			$this->load->view('site/public/one_to_one',$data);
-		
+			$this->load->view('site/public/404');	
 	}
 	
 	/*	public function insta()

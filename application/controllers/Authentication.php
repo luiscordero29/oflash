@@ -27,7 +27,7 @@ class Authentication extends CI_Controller {
 	{
 		# rules
 		$this->form_validation->set_rules('user_email', 'E-mail', 'required|valid_email');
-		$this->form_validation->set_rules('user_password', 'Contraseña', 'required|callback_check_usuario|callback_check_clave|callback_check_authentication|callback_check_authentication');
+		$this->form_validation->set_rules('user_password', 'Contraseña', 'required|callback_check_email|callback_check_password|callback_check_authentication');
 		# message
 		$this->form_validation->set_message('check_email', 'El Usuario ó Email no existe');
 		$this->form_validation->set_message('check_password', 'Contraseña invalidad');

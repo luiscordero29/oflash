@@ -76,14 +76,19 @@ Class Authentication_model extends CI_MODEL
 		$to = $user_email;
 		$from = 'info@oflash.com.ve';
 		$data['title'] = 'Registro de Usuario';
-		$data['content']  = '<p>Bienvenido al Sistema Integral de Salud, a continuación le enviamos sus datos de acceso</p>';
+		$data['content']  = '<p>Bienvenido al Content Manager System, a continuación le enviamos sus datos de acceso</p>';
 		$data['content'] .= '<p><b>E-MAIL:</b> '.$user_email.'</p>';
 		$data['content'] .= '<p><b>CLAVE:</b> '.$this->input->post('user_password').'</p>';
 		$data['content'] .= '<p><b>LINK DE VALIDACION:</b> <a href="'.site_url('authentication/validation/'.$user_route).'">Enlace de Validar Cuenta</a></p>';
 		$data['content'] .= '<p><b>Antes de ingresar debes validar la cuenta haciendo clic en el enlace anterior</b></p>';
 		$subject = $data['title'];
-		$message = $this->load->view('authentication/email', $data, TRUE);
-		$this->email->send($to,$from,$subject,$message);
+		$message = $this->load->view('authentication/email', $data, true);
+		# send mail
+		$this->email->from($from, 'OFLASH.com.ve | En Tus Mejores Momentos');
+		$this->email->to($to);
+		$this->email->subject($subject);
+		$this->email->message($message);
+		$this->email->send();
 
 		$data['alert']['info'] = 
 			array( 
@@ -93,10 +98,10 @@ Class Authentication_model extends CI_MODEL
 		return $data;
 	}
 
-	public function check_passwordrecovery()
+	public function check_password_recovery()
 	{
-		$dus_email = $this->input->post('dus_email');
-		$query = $this->db->get_where('usuarios', array('dus_email' => $dus_email));
+		$user_email = $this->input->post('user_email');
+		$query = $this->db->get_where('users', array('user_email' => $user_email));
 	    if($query->num_rows() > 0){
 	    	return true;
 	    }else{
@@ -105,29 +110,27 @@ Class Authentication_model extends CI_MODEL
 	}
 
 
-	public function passwordrecovery()
+	public function password_recovery()
 	{
-		$dus_email = $this->input->post('dus_email');
-		$query = $this->db->get_where('usuarios', array('dus_email' => $dus_email));
+		$user_email = $this->input->post('user_email');
+		$query = $this->db->get_where('users', array('user_email' => $user_email));
 	    if($query->num_rows() > 0){
 	    	
 	    	$row = $query->row_array();
 
-	    	$dus_usuario		= $row['dus_usuario'];
-	    	$dus_email			= $row['dus_email'];
-	    	$pass 				= rand(1000, 9999);
-	    	$dus_clave 			= hash('sha512', $pass);
-	    	$dus_estatus 		= 'NO';
-	    	$dus_ruta 			= hash('sha512', $dus_email);	
+	    	$password 		= rand(1000, 9999);
+	    	$user_password 	= hash('sha512', $password);
+	    	$user_validated = 'no';
+	    	$user_route 	= $this->uuid->v5(uniqid());
 
 	    	$data = array(
-				'dus_clave' 		=> $dus_clave,	  
-				'dus_estatus' 		=> $dus_estatus,	  
-				'dus_ruta' 			=> $dus_ruta,	  
+				'user_password' 		=> $user_password,	  
+				'user_validated' 	=> $user_validated,	  
+				'user_route' 			=> $user_route,	  
 			);
 
-			$this->db->where('dus_email', $dus_email);
-			$this->db->update('usuarios', $data);
+			$this->db->where('user_email', $user_email);
+			$this->db->update('users', $data);
 
 			$data['alert']['success'] = 
 				array( 
@@ -135,17 +138,22 @@ Class Authentication_model extends CI_MODEL
 				);
 
 			# email
-			$to = $dus_email;
-			$from = 'informatica@dirsaludbarinas.gob.ve';
-			$subject = 'Recuperar Clave - Sistema Integral de Salud';
-			$message  = '<p>Bienvenido al Sistema Integral de Salud, su datos de acceso es el siguiente</p>';
-			$message .= '<p><b>USUARIO:</b> '.$dus_usuario.'</p>';
-			$message .= '<p><b>CLAVE:</b> '.$pass.'</p>';
-			$message .= '<p><b>LINK DE VALIDACION:</b> <a href="'.site_url('authentication/validation/'.$dus_ruta).'">Enlace de Validar Cuenta</a></p>';
-			$message .= '<p><b>Antes de ingresar debes validar la cuenta haciendo clic en el enlace anterior</b></p>';
-
-			$this->load->model('Email_model');
-			$this->Email_model->send($to,$from,$subject,$message);
+			$to = $user_email;
+			$from = 'info@oflash.com.ve';
+			$data['title'] = 'Recuperar Clave';
+			$data['content']  = '<p>Bienvenido al Content Manager System, a continuación le enviamos sus datos de acceso</p>';
+			$data['content'] .= '<p><b>E-MAIL:</b> '.$user_email.'</p>';
+			$data['content'] .= '<p><b>CLAVE:</b> '.$password.'</p>';
+			$data['content'] .= '<p><b>LINK DE VALIDACION:</b> <a href="'.site_url('authentication/validation/'.$user_route).'">Enlace de Validar Cuenta</a></p>';
+			$data['content'] .= '<p><b>Antes de ingresar debes validar la cuenta haciendo clic en el enlace anterior</b></p>';
+			$subject = $data['title'];
+			$message = $this->load->view('authentication/email', $data, true);
+			# send mail
+			$this->email->from($from, 'OFLASH.com.ve | En Tus Mejores Momentos');
+			$this->email->to($to);
+			$this->email->subject($subject);
+			$this->email->message($message);
+			$this->email->send();
 
 			$data['alert']['info'] = 
 			array( 
@@ -161,17 +169,17 @@ Class Authentication_model extends CI_MODEL
 	    return $data;
 	}
 
-	public function validation($dus_ruta)
+	public function validation($user_route)
 	{
-		$query = $this->db->get_where('usuarios', array('dus_ruta' => $dus_ruta));
+		$query = $this->db->get_where('users', array('user_route' => $user_route));
 	    if($query->num_rows() > 0){
 
 	    	$data = array(
-				'dus_estatus' 		=> 'SI',	    
+				'user_validated' => 'yes',	    
 			);
 
-			$this->db->where('dus_ruta', $dus_ruta);
-			$this->db->update('usuarios', $data);
+			$this->db->where('user_route', $user_route);
+			$this->db->update('users', $data);
 
 	    	$data['alert']['success'] = 
 				array( 

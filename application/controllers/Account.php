@@ -18,7 +18,7 @@ class Account extends CI_Controller {
 		$this->load->model('Dashboard_model'); 
 		$this->load->model('Account_model'); 
 		# Control Sessión
-		if(!$this->session->has_userdata('dus_id'))
+		if(!$this->session->has_userdata('user_uid'))
    		{     						
 		    # If no session, redirect to login page
 		    redirect('authentication');

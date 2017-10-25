@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Content Manager System | Recuperar Clave</title>
-    <meta name="generator" content="Luis Cordero - http://luiscordero29.com/" />   
+    <meta name="generator" content="Luis Cordero - http://luiscordero29.com/" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -25,56 +25,43 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="register-logo">
             <a href="<?php echo site_url(); ?>">Content Manager System</a>
         </div>
-        <!-- /.login-logo -->
-        <div class="login-box-body">
+
+        <div class="register-box-body">
             <h4 class="text-center">Recuperar Clave</h4>
             <hr>
-            <?php echo form_open(); ?>
-                <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?> 
-                <div class="form-group has-feedback">
-                    <input type="email" name="user_email" class="form-control" placeholder="Email" autocomplete="off" maxlength="255" value="<?php echo set_value('dus_email'); ?>">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                </div>
-                <div class="row">
-                    <?php /* ?>/*
-                    <div class="col-xs-8">
-                        <div class="checkbox icheck">
-                            <label>
-                                <input name="remember" type="checkbox"> Recordar 
-                            </label>
-                        </div>
-                    </div>
-                    <?php */ ?>
-                    <!-- /.col -->
-                    <div class="col-xs-12">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Solicitar</button>
-                    </div>
-                    <!-- /.col -->
-                </div>
-            <?php echo form_close(); ?>
-
-            <?php /* ?>
-            <div class="social-auth-links text-center">
-              <p>- OR -</p>
-              <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-                Facebook</a>
-              <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-                Google+</a>
-            </div>
-            <!-- /.social-auth-links -->
-            */ ?>
+            <?php 
+                if (!empty($alert['success'])) {
+                    foreach ($alert['success'] as $key => $value) { 
+                        echo '<div class="alert alert-success">'.$value.'</div>';
+                    }
+                } 
+                if (!empty($alert['info'])) {
+                    foreach ($alert['info'] as $key => $value) { 
+                        echo '<div class="alert alert-info">'.$value.'</div>';
+                    }
+                }
+                if (!empty($alert['warning'])) {
+                    foreach ($alert['warning'] as $key => $value) { 
+                        echo '<div class="alert alert-warning">'.$value.'</div>';
+                    }
+                }
+                if (!empty($alert['danger'])) {
+                    foreach ($alert['danger'] as $key => $value) { 
+                        echo '<div class="alert alert-danger">'.$value.'</div>';
+                    }
+                }               
+            ?>
             <hr>
             <a href="<?php echo site_url('authentication/index'); ?>" class="text-center">Tengo una cuenta</a>
-
         </div>
-        <!-- /.login-box-body -->
+        <!-- /.form-box -->
     </div>
-    <!-- /.login-box -->
+    <!-- /.register-box -->
 
     <!-- jQuery 2.2.3 -->
     <script src="<?php echo base_url('assets/plugins/jQuery/jquery-2.2.3.min.js'); ?>"></script>
