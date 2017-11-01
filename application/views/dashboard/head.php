@@ -15,6 +15,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/css/AdminLTE.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/css/skins/_all-skins.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/css/Custom.css'); ?>">
     <!-- iCheck -->
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/iCheck/square/blue.css'); ?>">
     <!-- Morris chart -->

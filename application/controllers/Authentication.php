@@ -59,6 +59,8 @@ class Authentication extends CI_Controller {
 	public function register()
 	{
 		# rules
+		$this->form_validation->set_rules('user_firstname', 'Nombres', 'trim|required');
+		$this->form_validation->set_rules('user_lastname', 'Apellidos', 'trim|required');
 		$this->form_validation->set_rules('user_email', 'E-mail', 'trim|required|is_unique[users.user_email]|valid_email');
 		$this->form_validation->set_rules('user_password', 'Clave', 'required');
 		$this->form_validation->set_rules('user_password_matches', 'Repetir Clave', 'required|matches[user_password]');

@@ -19,8 +19,8 @@ Class Account_model extends CI_MODEL
 
 	public function read()
 	{			    
-	    $dus_id = $this->session->userdata('dus_id');
-	    $query = $this->db->get_where('usuarios', array('dus_id' => $dus_id));	    
+	    $user_uid = $this->session->userdata('user_uid');
+	    $query = $this->db->get_where('users', array('user_uid' => $user_uid));	    
 
 	    if($query->num_rows() > 0){	      
 	      	return $query->row_array();
@@ -32,23 +32,15 @@ Class Account_model extends CI_MODEL
 	public function update()
 	{
 		# registro
-		$dus_id 			= $this->input->post('dus_id');
-	    $dus_apellidos 		= $this->input->post('dus_apellidos');
-	   	$dus_nombres 		= $this->input->post('dus_nombres');
-	   	$dus_telefono 		= $this->input->post('dus_telefono');
-	   	$dus_direccion 		= $this->input->post('dus_direccion');	   	
-	   	$dus_email 			= $this->input->post('dus_email');	   	
+		$user_uid = $this->input->post('user_uid');   	
+	   	$user_email = $this->input->post('user_email');	   	
 	   
 	   	$data = array(
-			'dus_apellidos' 	=> $dus_apellidos,
-			'dus_nombres' 		=> $dus_nombres,
-			'dus_telefono' 		=> $dus_telefono,
-			'dus_direccion' 	=> $dus_direccion,
-			'dus_email' 		=> $dus_email,  
+			'user_email' => $user_email,  
 		);
 
-		$this->db->where('dus_id', $dus_id);
-		$this->db->update('usuarios', $data);
+		$this->db->where('user_uid', $user_uid);
+		$this->db->update('users', $data);
 
 		$data['success'] = 
 			array( 
@@ -60,11 +52,11 @@ Class Account_model extends CI_MODEL
 
 	public function check_email()
 	{
-		$dus_id = $this->input->post('dus_id');
-		$dus_email = $this->input->post('dus_email');
-		$query = $this->db->where('dus_email',$dus_email);
-		$query = $this->db->where('dus_id !=',$dus_id);
-		$query = $this->db->get('usuarios');
+		$user_uid = $this->input->post('user_uid');
+		$user_email = $this->input->post('user_email');
+		$query = $this->db->where('user_email',$user_email);
+		$query = $this->db->where('user_uid !=',$user_uid);
+		$query = $this->db->get('users');
 	    if($query->num_rows() > 0){
 	    	return false;
 	    }else{
@@ -75,15 +67,15 @@ Class Account_model extends CI_MODEL
 	public function password()
 	{
 		# registro
-		$dus_id 			= $this->input->post('dus_id');
-	    $dus_clave 			= hash('sha512', $this->input->post('dus_clave'));   
+		$user_uid = $this->input->post('user_uid');
+	    $user_password = hash('sha512', $this->input->post('user_password'));   
 	   	   	
 	   	$data = array(
-			'dus_clave' 		=> $dus_clave,	    
+			'user_password' => $user_password,	    
 		);
 
-		$this->db->where('dus_id', $dus_id);
-		$this->db->update('usuarios', $data);
+		$this->db->where('user_uid', $user_uid);
+		$this->db->update('users', $data);
 
 		$data['success'] = 
 			array( 

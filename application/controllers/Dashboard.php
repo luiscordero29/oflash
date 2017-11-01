@@ -28,12 +28,12 @@ class Dashboard extends CI_Controller {
 	{
 		$data = 
 			array(
-				'title' => 'Sistema Integral de Salud | Panel de Control', 
-				'module_title' => 'Sistema Integral de Salud', 
+				'title' => 'Content Manager System | Panel de Control', 
+				'module_title' => 'Content Manager System', 
 				'module_description' => 'Panel de Control', 
 				'breadcrumb' => 
 					array(
-						'<i class="fa fa-dashboard"></i> Sistema Integral de Salud' => 'dashboard/index',
+						'<i class="fa fa-dashboard"></i> Content Manager System' => 'dashboard/index',
 	            		'Panel de Control' => '', 
 					),
 			);

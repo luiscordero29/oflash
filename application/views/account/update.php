@@ -45,57 +45,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Usuario</label>
-                                            <input name="dus_usuario" class="form-control" disabled="" type="text" value="<?php echo $row['dus_usuario']; ?>">
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Cedula de Identidad</label>
-                                            <input name="dus_identidad" class="form-control" disabled="" type="text" value="<?php echo $row['dus_identidad']; ?>">
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Apellidos</label>
-                                            <input name="dus_apellidos" class="form-control" type="text" value="<?php echo $row['dus_apellidos']; ?>">
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Nombres</label>
-                                            <input name="dus_nombres" class="form-control" type="text" value="<?php echo $row['dus_nombres']; ?>">
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Dirección</label>
-                                            <input name="dus_direccion" class="form-control" type="text" value="<?php echo $row['dus_direccion']; ?>">
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Teléfono</label>
-                                            <input name="dus_telefono" class="form-control" type="text" value="<?php echo $row['dus_telefono']; ?>">
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6">
-                                        <div class="form-group">
                                             <label>Email</label>
-                                            <input name="dus_email" class="form-control" type="text" value="<?php echo $row['dus_email']; ?>">
+                                            <input name="user_email" class="form-control" type="text" value="<?php echo $row['user_email']; ?>">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Email</label>
-                                            <input name="dus_email" class="form-control" type="text" value="<?php echo $row['dus_email']; ?>">
-                                        </div>
-                                    </div> 
-
                                 </div> 
                                 <div class="box-footer">
                                     <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Guardar</button>
-                                    <input name="dus_id" class="form-control" type="hidden" value="<?php echo $row['dus_id']; ?>">
+                                    <input name="user_uid" class="form-control" type="hidden" value="<?php echo $row['user_uid']; ?>">
                                 </div>                              
                                 <?php echo form_close(); ?>
                             </div>

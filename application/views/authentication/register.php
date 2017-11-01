@@ -37,6 +37,20 @@
                 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?> 
                 
                 <div class="row">
+                    <div class="ol-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group has-feedback">
+                            <input type="text" name="user_firstname" class="form-control" placeholder="Nombres" autocomplete="off" maxlength="60" value="<?php echo set_value('user_firstname'); ?>">
+                            <span class="fa fa-id-card form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="ol-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group has-feedback">
+                            <input type="text" name="user_lastname" class="form-control" placeholder="Apellidos" autocomplete="off" maxlength="60" value="<?php echo set_value('user_lastname'); ?>">
+                            <span class="fa fa-id-card form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="ol-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="form-group has-feedback">
                             <input type="email" name="user_email" class="form-control" placeholder="Email *" autocomplete="off" maxlength="300" value="<?php echo set_value('user_email'); ?>">

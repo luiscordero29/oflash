@@ -46,19 +46,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Clave</label>
-                                            <input type="password" name="dus_clave" class="form-control">
+                                            <input type="password" name="user_password" class="form-control">
                                         </div>
                                     </div> 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Repetir Clave</label>
-                                            <input type="password" name="dus_clave_repetir" class="form-control">
+                                            <input type="password" name="user_password_matches" class="form-control">
                                         </div>
                                     </div>
                                 </div> 
                                 <div class="box-footer">
                                     <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Guardar</button>
-                                    <input name="dus_id" class="form-control" type="hidden" value="<?php echo $row['dus_id']; ?>">
+                                    <input name="user_uid" class="form-control" type="hidden" value="<?php echo $row['user_uid']; ?>">
                                 </div>                              
                                 <?php echo form_close(); ?>
                             </div>

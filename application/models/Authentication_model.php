@@ -50,19 +50,31 @@ Class Authentication_model extends CI_MODEL
 	{
 		# register	   	
 	   	$user_uid 			= $this->uuid->v5(uniqid());	   	
+	   	$user_firstname 	= $this->input->post('user_firstname');	   	
+	   	$user_lastname 		= $this->input->post('user_lastname');	   	
 	   	$user_email 		= $this->input->post('user_email');	   	
 	    $user_password 		= hash('sha512', $this->input->post('user_password'));
-	    $user_status 		= 'no';
+	    $user_activated 	= 'no';
 	    $user_validated 	= 'no';
 	    $user_route 		= $this->uuid->v5(uniqid());   
+	    $user_status 		= 'yes';
+	    $user_created 		= date('Y-m-d H:i:s');
+	    $user_update 		= date('Y-m-d H:i:s');
+	    $user_deleted 		= date('Y-m-d H:i:s');
 	   	   	
 	   	$data = array(
 			'user_uid' 			=> $user_uid,
+			'user_firstname' 	=> $user_firstname,	  
+			'user_lastname' 	=> $user_lastname,	  
 			'user_email' 		=> $user_email,	  
 			'user_password' 	=> $user_password,	  
-			'user_status' 		=> $user_status,	  
+			'user_activated' 	=> $user_activated,	  
 			'user_validated' 	=> $user_validated,	  
 			'user_route' 		=> $user_route,	  
+			'user_status' 		=> $user_status,	  
+			'user_created' 		=> $user_created,	  
+			'user_update' 		=> $user_update,	  
+			'user_deleted' 		=> $user_deleted,	  
 		);
 
 		$this->db->insert('users', $data);
@@ -77,6 +89,8 @@ Class Authentication_model extends CI_MODEL
 		$from = 'info@oflash.com.ve';
 		$data['title'] = 'Registro de Usuario';
 		$data['content']  = '<p>Bienvenido al Content Manager System, a continuación le enviamos sus datos de acceso</p>';
+		$data['content'] .= '<p><b>NOMBRES:</b> '.$user_firstname.'</p>';
+		$data['content'] .= '<p><b>APELLIDOS:</b> '.$user_lastname.'</p>';
 		$data['content'] .= '<p><b>E-MAIL:</b> '.$user_email.'</p>';
 		$data['content'] .= '<p><b>CLAVE:</b> '.$this->input->post('user_password').'</p>';
 		$data['content'] .= '<p><b>LINK DE VALIDACION:</b> <a href="'.site_url('authentication/validation/'.$user_route).'">Enlace de Validar Cuenta</a></p>';
@@ -122,11 +136,14 @@ Class Authentication_model extends CI_MODEL
 	    	$user_password 	= hash('sha512', $password);
 	    	$user_validated = 'no';
 	    	$user_route 	= $this->uuid->v5(uniqid());
+	    	$user_update 	= date('Y-m-d H:i:s');
+
 
 	    	$data = array(
 				'user_password' 		=> $user_password,	  
-				'user_validated' 	=> $user_validated,	  
+				'user_validated' 		=> $user_validated,	  
 				'user_route' 			=> $user_route,	  
+				'user_update' 			=> $user_update,	  
 			);
 
 			$this->db->where('user_email', $user_email);

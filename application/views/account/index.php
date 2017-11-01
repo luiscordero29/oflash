@@ -19,17 +19,9 @@
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-md-6"><p><b>Usuario:</b> <?php echo $row['dus_usuario']; ?></p></div>        
-                                    <div class="col-md-6"><p><b>Email:</b> <?php echo $row['dus_email']; ?></p></div>        
-                                </div>
-                                <hr>                              
-                                <div class="row">
-                                    <div class="col-md-12"><p><b>Cedula de Identidad:</b> <?php echo $row['dus_identidad']; ?></p></div>        
-                                    <div class="col-md-6"><p><b>Apellidos:</b> <?php echo $row['dus_apellidos']; ?></p></p></div>        
-                                    <div class="col-md-6"><p><b>Nombres:</b> <?php echo $row['dus_nombres']; ?></p></div>        
-                                    <div class="col-md-6"><p><b>Dirección:</b> <?php echo $row['dus_direccion']; ?></p></div>        
-                                    <div class="col-md-6"><p><b>Teléfono:</b> <?php echo $row['dus_telefono']; ?></p></div>        
-                                </div>                                
+                                    <div class="col-md-6"><p><b>Id:</b> <?php echo $row['user_uid']; ?></p></div>        
+                                    <div class="col-md-6"><p><b>E-mail:</b> <?php echo $row['user_email']; ?></p></div>        
+                                </div>                             
                             </div>
                         <!-- /.box-body -->
                         </div>

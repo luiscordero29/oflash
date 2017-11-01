@@ -1,9 +1,9 @@
     <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                Ing. Luis Cordero
+                Luis Cordero
             </div>
-            <strong>Oficina de Informática</strong>
+            <strong>Programador Web Freelance</strong>
         </footer>
         <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed

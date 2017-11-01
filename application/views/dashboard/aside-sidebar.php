@@ -5,10 +5,10 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="<?php echo $this->Dashboard_model->get_gravatar($this->session->userdata('dus_email'),160); ?>" class="img-circle" alt="<?php echo $this->session->userdata('dus_apellidos').' '.$this->session->userdata('dus_nombres'); ?>">
+                        <img src="<?php echo $this->Dashboard_model->get_gravatar($this->session->userdata('user_email'),160); ?>" class="img-circle" alt="<?php echo $this->session->userdata('user_email'); ?>">
                     </div>
                     <div class="pull-left info">
-                      <p><?php echo $this->session->userdata('dus_apellidos').' '.$this->session->userdata('dus_nombres'); ?></p>
+                      <p><?php echo $this->session->userdata('user_email'); ?></p>
                       <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -18,14 +18,25 @@
                     <li class="header">MENU PRINCIPAL</li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-file-pdf-o"></i> <span>Nominas</span>
+                            <i class="fa fa-cogs"></i> <span>Contenidos</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?php echo site_url('nominas/index') ?>"><i class="fa fa-circle-o"></i> Recibos de Pagos</a></li>
-                            <li><a href="<?php echo site_url('nominas/isrl') ?>"><i class="fa fa-circle-o"></i> Recibos ISRL</a></li>
+                            <li><a href="<?php echo site_url('contents/index') ?>"><i class="fa fa-circle-o"></i> Tabla de Contenidos</a></li>
+                            <li><a href="<?php echo site_url('categories/index') ?>"><i class="fa fa-circle-o"></i> Tabla de Categorias</a></li>
+                        </ul>
+                    </li> 
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-users"></i> <span>Usuarios</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="<?php echo site_url('users/index') ?>"><i class="fa fa-circle-o"></i> Tabla de Usuarios</a></li>
                         </ul>
                     </li> 
                     <li class="treeview">
