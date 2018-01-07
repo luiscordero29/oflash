@@ -45,6 +45,18 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label>Nombres</label>
+                                            <input name="user_firstname" class="form-control" type="text" value="<?php echo $row['user_firstname']; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Apellidos</label>
+                                            <input name="user_lastname" class="form-control" type="text" value="<?php echo $row['user_lastname']; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <label>Email</label>
                                             <input name="user_email" class="form-control" type="text" value="<?php echo $row['user_email']; ?>">
                                         </div>

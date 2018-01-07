@@ -20,6 +20,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?php echo $this->Dashboard_model->get_gravatar($this->session->userdata('user_email'),160); ?>" class="user-image" alt="<?php echo $this->session->userdata('dus_apellidos').' '.$this->session->userdata('dus_nombres'); ?>">
+                                <?php echo $this->session->userdata('user_firstname').' '.$this->session->userdata('user_lastname'); ?>
                                 <span class="hidden-xs"><?php echo $this->session->userdata('dus_apellidos').' '.$this->session->userdata('dus_nombres'); ?></span>
                             </a>
                             <ul class="dropdown-menu">
@@ -27,6 +28,7 @@
                                 <li class="user-header">
                                     <img src="<?php echo $this->Dashboard_model->get_gravatar($this->session->userdata('user_email'),160); ?>" class="img-circle" alt="User Image">
                                     <p>
+                                        <?php echo $this->session->userdata('user_firstname').' '.$this->session->userdata('user_lastname'); ?>
                                         <small><?php echo $this->session->userdata('user_email'); ?></small>
                                     </p>
                                 </li>                              

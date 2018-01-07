@@ -8,223 +8,137 @@ Class Users_model extends CI_MODEL
 
 	function table($limit,$start,$search)
 	{
-
-	    $sql = 
-	    "SELECT * FROM users 
-	     WHERE (
-	     	user_email LIKE '%".$search."%' ESCAPE '!' 
-	     	OR user_status LIKE '%".$search."%'  
-	     	)
-	     ORDER BY user_id DESC
-	     LIMIT  ".$limit.",".$start."
+	    $sql = "
+	    	SELECT * FROM users WHERE 
+	    	(user_status = 'yes') AND
+	     	(user_email LIKE '%".$search."%' ESCAPE '!' 
+	     	OR user_firstname LIKE '%".$search."%'
+	     	OR user_lastname LIKE '%".$search."%')
+	     	ORDER BY user_id DESC
+	     	LIMIT  ".$limit.",".$start."
 	    ";
 
 	    $query = $this->db->query($sql);
 
-	    if($query->num_rows() > 0)
-	    {
+	    if($query->num_rows() > 0){
 	      	return $query->result_array();
-	    }
-	    else
-	    {
+	    }else{
 	      	return false;
 	    }
 	}
 
 	function table_rows($search)
 	{
-	    
-	    $sql = 
-	    "SELECT * FROM usuarios 
-	     WHERE (tipo = 'ADMINISTRADOR') 
-	     AND (
-	     	usuario LIKE '%".$search."%' ESCAPE '!' 
-	     	OR correo LIKE '%".$search."%' ESCAPE '!'
-	     	OR activo LIKE '%".$search."%'  
-	     	)
-	     ORDER BY id_usuario DESC
+	    $sql = "
+	    	SELECT * FROM users WHERE 
+	    	(user_status = 'yes') AND
+	     	(user_email LIKE '%".$search."%' ESCAPE '!' 
+	     	OR user_firstname LIKE '%".$search."%'
+	     	OR user_lastname LIKE '%".$search."%')
 	    ";
 
 	    $query = $this->db->query($sql);
 
-	    if($query->num_rows() > 0)
-	    {
+	    if($query->num_rows() > 0){
 	      	return $query->num_rows();
-	    }
-	    else
-	    {
+	    }else{
 	      	return false;
 	    }
 	}
 
 	function create()
-	{
-	   
-	   	$usuario 	= $this->input->post('usuario');
-	   	$clave 		= MD5($this->input->post('usuario'));
-	   	$activo 	= $this->input->post('activo');
-	   	$correo 	= $this->input->post('correo');	 
-	   	$tipo 		= $this->input->post('tipo');	     	
+	{ 
+	    $user_uid = $this->uuid->v5(uniqid());   
+	   	$user_firstname = $this->input->post('user_firstname');
+	   	$user_lastname = $this->input->post('user_lastname');
+	   	$user_email = $this->input->post('user_email');	 
+	   	$user_password = hash('sha512', $this->input->post('user_password')); 
+	   	$user_activated = $this->input->post('user_activated');
+	    $user_validated = $this->input->post('user_validated');
+	    $user_route = $this->uuid->v5(uniqid());   
+	    $user_status = 'yes';
+	    $user_created = date('Y-m-d H:i:s');
+	    $user_update = date('Y-m-d H:i:s');
+	    $user_deleted = date('Y-m-d H:i:s');   	
 
 	   	$data = array(
-		   'usuario' 	=> $usuario,
-		   'activo' 	=> $activo,
-		   'clave' 		=> $clave,
-		   'correo' 	=> $correo,
-		   'tipo' 		=> $tipo,
+		   'user_uid' => $user_uid,
+		   'user_firstname' => $user_firstname,
+		   'user_lastname' => $user_lastname,
+		   'user_email' => $user_email,
+		   'user_password' => $user_password,
+		   'user_activated' => $user_activated,
+		   'user_validated' => $user_validated,
+		   'user_route' => $user_route,
+		   'user_status' => $user_status,
+		   'user_created' => $user_created,
+		   'user_update' => $user_update,
+		   'user_deleted' => $user_deleted,
 		);
 
-		$this->db->insert('usuarios', $data); 
+		$this->db->insert('users', $data); 
 	    
 	    return true;
-
 	} 
 
-	function read($id_usuario)
+	function read($user_uid)
 	{			    
-	    
-	    $query = $this->db->get_where('usuarios', array('tipo' => 'ADMINISTRADOR', 'id_usuario' => $id_usuario));	    
+	    $query = $this->db->get_where('users', array('user_status' => 'yes', 'user_uid' => $user_uid));	    
 
-	    if($query->num_rows() > 0)
-	    {	      
-	      return $query->row_array();
+	    if($query->num_rows() > 0){	      
+	      	return $query->row_array();
+	    }else{
+	      	return false;
 	    }
-	    else
-	    {
-	      return false;
-	    }
-
 	}
 
 	function update()
-	{
-	    
-	    $id_usuario = $this->input->post('id_usuario');
-
-	    $usuario 	= $this->input->post('usuario');
-	   	$activo 	= $this->input->post('activo');
-	   	$correo 	= $this->input->post('correo');	   	
+	{   
+	    $user_uid = $this->input->post('user_uid');   
+	   	$user_firstname = $this->input->post('user_firstname');
+	   	$user_lastname = $this->input->post('user_lastname');
+	   	$user_email = $this->input->post('user_email');	 
+	   	$user_activated = $this->input->post('user_activated');
+	    $user_validated = $this->input->post('user_validated');
+	    $user_update = date('Y-m-d H:i:s');
+	    $user_deleted = date('Y-m-d H:i:s');   	
 
 	   	$data = array(
-		   'usuario' 	=> $usuario,
-		   'activo' 	=> $activo,
-		   'correo' 	=> $correo,
+		   'user_firstname' => $user_firstname,
+		   'user_lastname' => $user_lastname,
+		   'user_email' => $user_email,
+		   'user_activated' => $user_activated,
+		   'user_validated' => $user_validated,
+		   'user_update' => $user_update,
+		   'user_deleted' => $user_deleted,
 		);
 	    
-		$query = $this->db->get_where('usuarios', array('tipo' => 'ADMINISTRADOR', 'id_usuario' => $id_usuario));	    
+	    $query = $this->db->get_where('users', array('user_status' => 'yes', 'user_uid' => $user_uid));	    
 
-	    if($query->num_rows() > 0)
-	    {	      	      	
-	      	$this->db->where('id_usuario', $id_usuario);
-			$this->db->update('usuarios', $data); 
+	    if($query->num_rows() > 0){	      	      	
+	      	$this->db->where('user_uid', $user_uid);
+			$this->db->update('users', $data); 
 	      	return true;
-	    }
-	    else
-	    {
+	    }else{
 	      	return false;
 	    }
 	} 
 
-	function delete($id_usuario)
+	function delete($user_uid)
 	{
-	   
-	   	$query = $this->db->get_where('usuarios', array('tipo' => 'ADMINISTRADOR', 'id_usuario' => $id_usuario));	
-	   	
-	    // eliminar
-	    if($query->num_rows() > 0)
-	    {	      
-	      	$data = $query->row_array();
-
-		    /*// conceptos
-			$query1 = $this->db->get_where('conceptos', array('usuario' => $data['usuario']));		    		
-			if($query1->num_rows() > 0)
-		    {	      	      	
-		      	return false;
-		    }
-
-		    // proveedores
-			$query2 = $this->db->get_where('proveedores', array('usuario' => $data['usuario']));		    		
-			if($query2->num_rows() > 0)
-		    {	      	      	
-		      	return false;
-		    }
-
-		    // documentos
-			$query3 = $this->db->get_where('documentos', array('usuario' => $data['usuario']));		    		
-			if($query3->num_rows() > 0)
-		    {	      	      	
-		      	return false;
-		    }
-
-		    // almacenes
-			$query4 = $this->db->get_where('almacenes', array('usuario' => $data['usuario']));		    		
-			if($query4->num_rows() > 0)
-		    {	      	      	
-		      	return false;
-		    }
-
-		    // unidades
-			$query5 = $this->db->get_where('unidades', array('usuario' => $data['usuario']));		    		
-			if($query5->num_rows() > 0)
-		    {	      	      	
-		      	return false;
-		    }
-
-		    // articulos
-			$query6 = $this->db->get_where('articulos', array('usuario' => $data['usuario']));		    		
-			if($query6->num_rows() > 0)
-		    {	      	      	
-		      	return false;
-		    }
-
-		    // grupos
-			$query7 = $this->db->get_where('grupos', array('usuario' => $data['usuario']));		    		
-			if($query7->num_rows() > 0)
-		    {	      	      	
-		      	return false;
-		    }
-
-		    // subgrupos
-			$query8 = $this->db->get_where('subgrupos', array('usuario' => $data['usuario']));		    		
-			if($query8->num_rows() > 0)
-		    {	      	      	
-		      	return false;
-		    }
-
-		    // secciones
-			$query9 = $this->db->get_where('secciones', array('usuario' => $data['usuario']));		    		
-			if($query9->num_rows() > 0)
-		    {	      	      	
-		      	return false;
-		    }*/
-
-	    	$this->db->where('id_usuario', $id_usuario);
-			$this->db->delete('usuarios'); 
+	    $query = $this->db->get_where('users', array('user_status' => 'yes', 'user_uid' => $user_uid));	    
+	    if($query->num_rows() > 0){	      
+		    $user_status = 'no';   	
+		    $user_deleted = date('Y-m-d H:i:s');   	
+		   	$data = array(
+			   'user_status' => $user_status,
+			   'user_deleted' => $user_deleted,
+			);
+	    	$this->db->where('user_uid', $user_uid);
+			$this->db->delete('users'); 
 	      	return true;
-	    }
-	    else
-	    {
+	    }else{
 	      	return false;
 	    }
 	}	
-
-	function usuario_check()
-	{		
-	    $usuario = $this->input->post('usuario');
-	    $id_usuario = $this->input->post('id_usuario');
-
-	    $this->db->where('id_usuario !=', $id_usuario);
-		$this->db->where('usuario', $usuario); 
-		$query = $this->db->get('usuarios');
-	    
-	    if($query->num_rows() > 0)
-	    {	      
-	      	return true;
-	    }
-	    else
-	    {
-	      	return false;
-	    }
-	}
-
 }

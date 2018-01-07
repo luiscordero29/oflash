@@ -8,7 +8,7 @@
                         <img src="<?php echo $this->Dashboard_model->get_gravatar($this->session->userdata('user_email'),160); ?>" class="img-circle" alt="<?php echo $this->session->userdata('user_email'); ?>">
                     </div>
                     <div class="pull-left info">
-                      <p><?php echo $this->session->userdata('user_email'); ?></p>
+                      <p><?php echo $this->session->userdata('user_firstname').' '.$this->session->userdata('user_lastname'); ?></p>
                       <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>

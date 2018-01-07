@@ -36,8 +36,10 @@ Class Authentication_model extends CI_MODEL
 	    if($query->num_rows() > 0){
 	    	$r = $query->row_array();
 	    	$sess_array = array(
-		        'user_uid' 		=> $r['user_uid'],
-		        'user_email' 	=> $r['user_email'],		          	          	
+		        'user_uid' => $r['user_uid'],
+		        'user_firstname' => $r['user_firstname'],
+		        'user_lastname' => $r['user_lastname'],
+		        'user_email' => $r['user_email'],		          	          	
 		    );
 	        $this->session->set_userdata($sess_array);
 	    	return true;
@@ -191,8 +193,11 @@ Class Authentication_model extends CI_MODEL
 		$query = $this->db->get_where('users', array('user_route' => $user_route));
 	    if($query->num_rows() > 0){
 
+	    	$user_update 		= date('Y-m-d H:i:s');
+	    	
 	    	$data = array(
-				'user_validated' => 'yes',	    
+				'user_validated' => 'yes',
+				'user_update' => $user_update,	    
 			);
 
 			$this->db->where('user_route', $user_route);

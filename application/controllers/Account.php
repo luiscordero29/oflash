@@ -58,6 +58,8 @@ class Account extends CI_Controller {
 					),
 			);
 		# rules
+		$this->form_validation->set_rules('user_firstname', 'Nombres', 'trim|required');
+		$this->form_validation->set_rules('user_lastname', 'Apellidos', 'trim|required');
 		$this->form_validation->set_rules('user_email', 'E-mail', 'trim|required|callback_check_email|valid_email');
 		# message
 		$this->form_validation->set_message('check_email', 'El campo Email duplicado');

@@ -33,10 +33,17 @@ Class Account_model extends CI_MODEL
 	{
 		# registro
 		$user_uid = $this->input->post('user_uid');   	
-	   	$user_email = $this->input->post('user_email');	   	
+	   	$user_firstname = $this->input->post('user_firstname');	   	
+	   	$user_lastname = $this->input->post('user_lastname');	   	
+	   	$user_email = $this->input->post('user_email');	
+	    $user_update 	= date('Y-m-d H:i:s');
+
 	   
 	   	$data = array(
+			'user_firstname' => $user_firstname,  
+			'user_lastname' => $user_lastname,  
 			'user_email' => $user_email,  
+			'user_update' => $user_update,  
 		);
 
 		$this->db->where('user_uid', $user_uid);
@@ -68,10 +75,13 @@ Class Account_model extends CI_MODEL
 	{
 		# registro
 		$user_uid = $this->input->post('user_uid');
-	    $user_password = hash('sha512', $this->input->post('user_password'));   
+	    $user_password = hash('sha512', $this->input->post('user_password')); 
+	    $user_update 	= date('Y-m-d H:i:s');
+	      
 	   	   	
 	   	$data = array(
 			'user_password' => $user_password,	    
+			'user_update' => $user_update,	    
 		);
 
 		$this->db->where('user_uid', $user_uid);

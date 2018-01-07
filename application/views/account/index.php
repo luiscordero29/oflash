@@ -19,8 +19,10 @@
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-md-6"><p><b>Id:</b> <?php echo $row['user_uid']; ?></p></div>        
-                                    <div class="col-md-6"><p><b>E-mail:</b> <?php echo $row['user_email']; ?></p></div>        
+                                    <div class="col-md-12"><p><b>Id:</b> <?php echo $row['user_uid']; ?></p></div>        
+                                    <div class="col-md-6"><p><b>Nombres:</b> <?php echo $row['user_firstname']; ?></p></div>        
+                                    <div class="col-md-6"><p><b>Apellidos:</b> <?php echo $row['user_lastname']; ?></p></div>        
+                                    <div class="col-md-12"><p><b>E-mail:</b> <?php echo $row['user_email']; ?></p></div>        
                                 </div>                             
                             </div>
                         <!-- /.box-body -->

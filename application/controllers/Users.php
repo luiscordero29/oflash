@@ -30,13 +30,13 @@ class Users extends CI_Controller {
 					
 		$data = 
 			array(
-				'title' => 'Content Manager System | Panel de Control | Tabla de Usuarios', 
-				'module_title' => 'Cuenta', 
+				'title' => 'Content Manager System | Panel de Control | Usuarios', 
+				'module_title' => 'Usuarios', 
 				'module_description' => 'Tabla de Usuarios', 
 				'breadcrumb' => 
 					array(
 						'<i class="fa fa-dashboard"></i> Content Manager System' => 'dashboard/index',
-						'<i class="fa fa-user"></i> Tabla de Usuarios' => $this->controller.'/index',
+						'<i class="fa fa-user"></i> Usuarios' => $this->controller.'/index',
 	            		'Tabla de Usuarios' => '', 
 					),
 			);
@@ -72,38 +72,32 @@ class Users extends CI_Controller {
 	public function create()
 	{
 	
-		// Control de Acceso
-		if(!($this->session->userdata('tipo')=='ADMINISTRADOR'))
-   		{     						
-		    //If no session, redirect to login page
-		    redirect('administradores');
-		    
-		}
-
-		# Data
-		$data['meta'] = 'APA ROSA MOLAS | Administradores - Lista de Administradores';
-		$data['title'] = '<i class="fa fa-user-plus"></i> Administradores';
-		$data['subtitle'] = 'Nuevo Registro';
-		$data['breadcrumbs'] = 
+		$data = 
 			array(
-              	'<i class="fa fa-dashboard"></i> Home'				=> 'panel/index',
-              	'<i class="fa fa-user-plus"></i> Administradores'	=> 'administradores/index',
-              	'Nuevo Registro'									=> '',              	
-            );            
+				'title' => 'Content Manager System | Panel de Control | Usuarios', 
+				'module_title' => 'Usuarios', 
+				'module_description' => 'Crear Usuario', 
+				'breadcrumb' => 
+					array(
+						'<i class="fa fa-dashboard"></i> Content Manager System' => 'dashboard/index',
+						'<i class="fa fa-user"></i> Usuarios' => $this->controller.'/index',
+	            		'Crear Usuario' => '', 
+					),
+			);         
 			
-		$this->form_validation->set_rules('usuario', 'Usuario', 'trim|required|is_unique[usuarios.usuario]|min_length[6]|max_length[15]|alpha_numeric');
-		$this->form_validation->set_rules('activo', 'Activo', 'required');
-		$this->form_validation->set_rules('correo', 'E-mail', 'trim|valid_email');		
+		$this->form_validation->set_rules('user_firstname', 'Nombres', 'trim|required');
+		$this->form_validation->set_rules('user_lastname', 'Apellidos', 'trim|required');
+		$this->form_validation->set_rules('user_email', 'Usuario', 'trim|required|is_unique[users.user_email]|valid_email');
+		$this->form_validation->set_rules('user_password', 'Clave', 'required');
+		$this->form_validation->set_rules('user_password_matches', 'Repetir Clave', 'required|matches[user_password]');
+		$this->form_validation->set_rules('user_activated', 'Activo', 'required');
+		$this->form_validation->set_rules('user_validated', 'Validado', 'required');		
 
-		if($this->form_validation->run() == FALSE)
-		{
-				
+		if($this->form_validation->run() == FALSE){
 			$this->load->view($this->controller.'/create',$data);		
-
 		}else{
-
 			$this->Users_model->create();
-				
+		
 			$data['alert']['success'] = 
 			array( 
 				'Registrado Correctamente',				
@@ -113,177 +107,128 @@ class Users extends CI_Controller {
 		}			
 	}
 
-	public function view($id_usuario=false)
+	public function view($user_uid=false)
 	{			
 
-		# Data
-		$data['meta'] = 'APA ROSA MOLAS | Administradores - Lista de Administradores';
-		$data['title'] = '<i class="fa fa-user-plus"></i> Administradores';
-		$data['subtitle'] = 'Ver Información';
-		$data['breadcrumbs'] = 
+		$data = 
 			array(
-              	'<i class="fa fa-dashboard"></i> Home'				=> 'panel/index',
-              	'<i class="fa fa-user-plus"></i> Administradores'	=> 'administradores/index',
-              	'Ver Información'									=> '',              	
-            );
+				'title' => 'Content Manager System | Panel de Control | Usuarios', 
+				'module_title' => 'Usuarios', 
+				'module_description' => 'Ver Usuario', 
+				'breadcrumb' => 
+					array(
+						'<i class="fa fa-dashboard"></i> Content Manager System' => 'dashboard/index',
+						'<i class="fa fa-user"></i> Usuarios' => $this->controller.'/index',
+	            		'Ver Usuario' => '', 
+					),
+			);   
 			
-		$data['row'] = $this->Users_model->read($id_usuario);
+		$data['row'] = $this->Users_model->read($user_uid);
 		
-		if(empty($data['row']))
-		{
+		if(empty($data['row'])){
 			$data['alert']['danger'] = 
 				array( 
 					'No exite registro ó No puede ser eliminado',				
 				);
-
 			$this->load->view($this->controller.'/message',$data);
-		
 		}else{
-
 			$this->load->view($this->controller.'/view',$data);
-		
 		}
-			
 	}
 
-	public function update($id_usuario=false)
+	public function update($user_uid=false)
 	{			
-		// Control de Acceso
-		if(!($this->session->userdata('tipo')=='ADMINISTRADOR'))
-   		{     						
-		    //If no session, redirect to login page
-		    redirect('administradores');
-		    
-		}
-		# Data
-		$data['meta'] = 'APA ROSA MOLAS | Administradores - Lista de Administradores';
-		$data['title'] = '<i class="fa fa-user-plus"></i> Administradores';
-		$data['subtitle'] = 'Editar Información';
-		$data['breadcrumbs'] = 
+		$data = 
 			array(
-              	'<i class="fa fa-dashboard"></i> Home'				=> 'panel/index',
-              	'<i class="fa fa-user-plus"></i> Administradores'	=> 'administradores/index',
-              	'Editar Información'								=> '',              	
-            );
+				'title' => 'Content Manager System | Panel de Control | Usuarios', 
+				'module_title' => 'Usuarios', 
+				'module_description' => 'Editar Usuario', 
+				'breadcrumb' => 
+					array(
+						'<i class="fa fa-dashboard"></i> Content Manager System' => 'dashboard/index',
+						'<i class="fa fa-user"></i> Usuarios' => $this->controller.'/index',
+	            		'Editar Usuario' => '', 
+					),
+			); 
 			
-		$data['row'] = $this->Users_model->read($id_usuario);
+		$data['row'] = $this->Users_model->read($user_uid);
 			
-		$this->form_validation->set_rules('usuario', 'Usuario', 'trim|required|min_length[6]|max_length[15]|alpha_numeric|callback_usuario_check');
-		$this->form_validation->set_rules('activo', 'Activo', 'required');
-		$this->form_validation->set_rules('correo', 'E-mail', 'trim|valid_email');				
+		$this->form_validation->set_rules('user_firstname', 'Nombres', 'trim|required');
+		$this->form_validation->set_rules('user_lastname', 'Apellidos', 'trim|required');
+		$this->form_validation->set_rules('user_email', 'Usuario', 'trim|required|callback_check_email|valid_email');
+		$this->form_validation->set_rules('user_activated', 'Activo', 'required');
+		$this->form_validation->set_rules('user_validated', 'Validado', 'required');				
 
-		$this->form_validation->set_message('usuario_check', 'El campo Usuario ingresado ya se encuentra ocupado.');
+		$this->form_validation->set_message('check_email', 'El campo E-mail ingresado ya se encuentra ocupado.');
 			
-
-		if($this->form_validation->run() == FALSE)
-		{
-			$data['row'] = $this->Users_model->read($id_usuario);
-			if(empty($data['row']))
-			{
+		if($this->form_validation->run() == FALSE){
+			$data['row'] = $this->Users_model->read($user_uid);
+			if(empty($data['row'])){
 				$data['alert']['danger'] = 
 					array( 
 						'No exite registro ó No puede ser eliminado',				
 					);
-
 				$this->load->view($this->controller.'/message',$data);
 			}else{
-
 				$this->load->view($this->controller.'/update',$data);			
-			
 			}
+
 		}else{
 				
 			$this->Users_model->update();
-				
-			$data['row'] = $this->Users_model->read($id_usuario);
-			if(empty($data['row']))
-			{
-				$data['alert']['danger'] = 
-					array( 
-						'No exite registro ó No puede ser eliminado',				
-					);
+	
+			$data['row'] = $this->Users_model->read($user_uid);
 
-				$this->load->view($this->controller.'/message',$data);
-			}else{
+			$data['alert']['success'] = 
+				array( 
+					'Registrado Guardado',				
+				);
 
-				$data['alert']['success'] = 
-					array( 
-						'Registrado Correctamente',				
-					);
-
-				$this->load->view($this->controller.'/update',$data);			
-			
-			}
-
+			$this->load->view($this->controller.'/update',$data);			
 		}			
 	}
 
-	public function delete($id_usuario=false)
+	public function delete($user_uid=false)
 	{
 		
-		// Control de Acceso
-		if(!($this->session->userdata('tipo')=='ADMINISTRADOR'))
-   		{     						
-		    //If no session, redirect to login page
-		    redirect('administradores');
-		    
-		}
-
-		# Data
-		$data['meta'] = 'APA ROSA MOLAS | Administradores - Lista de Administradores';
-		$data['title'] = '<i class="fa fa-user-plus"></i> Administradores';
-		$data['subtitle'] = 'Eliminar Información';
-		$data['breadcrumbs'] = 
+		$data = 
 			array(
-              	'<i class="fa fa-dashboard"></i> Home'				=> 'panel/index',
-              	'<i class="fa fa-user-plus"></i> Administradores'	=> 'administradores/index',
-              	'Eliminar Información'								=> '',              	
-            );
+				'title' => 'Content Manager System | Panel de Control | Usuarios', 
+				'module_title' => 'Usuarios', 
+				'module_description' => 'Eliminar Usuario', 
+				'breadcrumb' => 
+					array(
+						'<i class="fa fa-dashboard"></i> Content Manager System' => 'dashboard/index',
+						'<i class="fa fa-user"></i> Usuarios' => $this->controller.'/index',
+	            		'Eliminar Usuario' => '', 
+					),
+			); 
 
-
-        if($id_usuario===FALSE)
-		{
+		$data['row'] = $this->Users_model->read($user_uid);
+		if(empty($data['row'])){
 			$data['alert']['danger'] = 
 				array( 
 					'No exite registro ó No puede ser eliminado',				
 				);
-
-			$this->load->view($this->controller.'/message',$data);			
+			$this->load->view($this->controller.'/message',$data);
 		}else{
+
+			$this->Users_model->delete($user_uid);
 			
-			$check = $this->Users_model->delete($id_usuario);
-			
-			if($check)
-		    {
-		        $data['alert']['success'] = 
+		    $data['alert']['success'] = 
 				array( 
 					'Registro Eliminado Correctamente',				
 				);
-		    }
-		    else
-		    {         
-		        $data['alert']['danger'] = 
-				array( 
-					'No exite registro ó No puede ser eliminado',				
-				);
-		    }
 				
 			$this->load->view($this->controller.'/message',$data);
-		}			
-			
+		
+		}				
+	
 	}
 
-	public function usuario_check()
+	public function check_email()
   	{
-      	$check = $this->Users_model->usuario_check();
-      	if($check)
-      	{
-           	return false;
-      	}
-      	else
-      	{         
-           	return true;
-      	}
+      	return $this->Users_model->check_email();
   	}
 
 }
