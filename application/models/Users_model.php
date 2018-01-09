@@ -6,14 +6,19 @@ Class Users_model extends CI_MODEL
 		parent::__construct();
 	}		
 
-	function table($limit,$start,$search)
+	function table($limit,$start)
 	{
+	    
+	   	$search = $this->input->post('s');
+
 	    $sql = "
 	    	SELECT * FROM users WHERE 
 	    	(user_status = 'yes') AND
-	     	(user_email LIKE '%".$search."%' ESCAPE '!' 
-	     	OR user_firstname LIKE '%".$search."%'
-	     	OR user_lastname LIKE '%".$search."%')
+	     	(
+	     		user_email LIKE '%".$search."%' ESCAPE '!' OR 
+	     		user_firstname LIKE '%".$search."%' OR 
+	     		user_lastname LIKE '%".$search."%'
+	     	)
 	     	ORDER BY user_id DESC
 	     	LIMIT  ".$limit.",".$start."
 	    ";
@@ -27,14 +32,20 @@ Class Users_model extends CI_MODEL
 	    }
 	}
 
-	function table_rows($search)
+	function table_rows()
 	{
+	    
+	    $search = $this->input->post('s');
+
 	    $sql = "
 	    	SELECT * FROM users WHERE 
 	    	(user_status = 'yes') AND
-	     	(user_email LIKE '%".$search."%' ESCAPE '!' 
-	     	OR user_firstname LIKE '%".$search."%'
-	     	OR user_lastname LIKE '%".$search."%')
+	     	(
+	     		user_email LIKE '%".$search."%' ESCAPE '!' OR 
+	     		user_firstname LIKE '%".$search."%' OR 
+	     		user_lastname LIKE '%".$search."%'
+	     	)
+	     	ORDER BY user_id DESC
 	    ";
 
 	    $query = $this->db->query($sql);

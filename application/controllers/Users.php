@@ -14,7 +14,8 @@ class Users extends CI_Controller {
 	{
 		parent::__construct();		
 		$this->load->driver('session');
-		$this->load->model('Users_model','',TRUE); 
+		$this->load->model('Dashboard_model');
+		$this->load->model('Users_model'); 
 		// Control Sessión
 		if(!$this->session->has_userdata('user_uid'))
    		{     						
@@ -36,30 +37,17 @@ class Users extends CI_Controller {
 				'breadcrumb' => 
 					array(
 						'<i class="fa fa-dashboard"></i> Content Manager System' => 'dashboard/index',
-						'<i class="fa fa-user"></i> Usuarios' => $this->controller.'/index',
+						'<i class="fa fa-users"></i> Usuarios' => $this->controller.'/index',
 	            		'Tabla de Usuarios' => '', 
 					),
 			);
 				
 		$table_limit = 30;
-		$table_page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;		
-
-		$s = trim($this->input->post('s'));
-		$search = trim($search);
-		if(!empty($s)){
-			$data['search'] = $s;
-			$data['search_url'] = '/'.$s;					
-		}elseif(!empty($search)){
-			$data['search'] = urldecode($search);
-			$data['search_url'] = '/'.$search;
-		}else{
-			$data['search'] = $s;
-			$data['search_url'] = '';
-		}
+		$table_page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;		
 
 		$data['controller'] 	= $this->controller;				
-		$data['table'] 			= $this->Users_model->table($table_page*$table_limit,$table_limit,$data['search']);
-		$data['table_rows'] 	= $this->Users_model->table_rows($data['search']);
+		$data['table'] 			= $this->Users_model->table($table_page*$table_limit,$table_limit);
+		$data['table_rows'] 	= $this->Users_model->table_rows();
 		$data['table_page'] 	= $table_page;
 		$data['table_limit'] 	= $table_limit;
 
