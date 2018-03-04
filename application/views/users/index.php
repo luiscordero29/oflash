@@ -21,11 +21,13 @@
                                         </div>
                                         <div class="col-xs-4 col-xs-offset-4">
                                             <?php 
-                                                echo form_open('', array('class' => 'form-inline pull-right')); 
+                                                echo form_open('users/index', array('class' => 'form-inline pull-right')); 
                                             ?>
                                             <div class="input-group input-group-sm">
-                                                <input type="text" name="s" class="form-control pull-right" placeholder="Buscar" value="<?php echo set_value('s'); ?>">
+                                                <input type="text" name="Users_search" class="form-control pull-right" placeholder="Buscar" value="<?php echo $data['Users_search']; ?>">
                                             </div>
+                                            <input type="hidden" name="Users_field" value="<?php echo $data['Users_field']; ?>">
+                                            <input type="hidden" name="Users_orderby" value="<?php echo $data['Users_orderby']; ?>">
                                             <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-search"></i> BUSCAR</button>
                                             <?php 
                                                 echo form_close(); 
@@ -72,17 +74,6 @@
                                                             </div>
                                                         </div>
                                                     </th>
-                                                    <th>
-                                                        <div class="pull-left">
-                                                            Estatus
-                                                        </div>
-                                                        <div class="pull-right">
-                                                            <div class="btn-group" role="group">
-                                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-sort-alpha-asc"></i></button>
-                                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-sort-alpha-desc"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </th>
                                                     <th width="1%">Acciones</th>
                                                 </tr>
                                             </thead>
@@ -95,7 +86,6 @@
                                                     <td><?php echo $r['user_firstname']; ?></td>
                                                     <td><?php echo $r['user_lastname']; ?></td>
                                                     <td><?php echo $r['user_email']; ?></td>
-                                                    <td><?php echo $r['user_status']; ?></td>
                                                     <td>
                                                         <?php if($this->session->userdata('user_uid')<>$r['user_uid']){ ?>
                                                         <div class="btn-group-vertical pull-right">
@@ -113,7 +103,6 @@
                                                     <th>Apellidos</th>
                                                     <th>Nombres</th>
                                                     <th>Correo</th>
-                                                    <th>Activo</th>
                                                     <th width="1%">Acciones</th>
                                                 </tr>
                                             </tfoot>

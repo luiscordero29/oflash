@@ -6,11 +6,12 @@ Class Users_model extends CI_MODEL
 		parent::__construct();
 	}		
 
-	function table($limit,$start)
+	function table($data)
 	{
 	    
-	   	$search = $this->input->post('s');
-
+	   	$search = $data['Users_search'];
+	   	$limit = $data['table_limit']*($data['table_page']-1);
+	   	$start = $data['Users_search'];
 	    $sql = "
 	    	SELECT * FROM users WHERE 
 	    	(user_status = 'yes') AND
@@ -19,7 +20,7 @@ Class Users_model extends CI_MODEL
 	     		user_firstname LIKE '%".$search."%' OR 
 	     		user_lastname LIKE '%".$search."%'
 	     	)
-	     	ORDER BY user_id DESC
+	     	ORDER BY ". $data['Users_field'] ." ". $data['Users_orderby'] ."
 	     	LIMIT  ".$limit.",".$start."
 	    ";
 
@@ -35,7 +36,7 @@ Class Users_model extends CI_MODEL
 	function table_rows()
 	{
 	    
-	    $search = $this->input->post('s');
+	    $search = $data['Users_search'];
 
 	    $sql = "
 	    	SELECT * FROM users WHERE 
@@ -45,8 +46,7 @@ Class Users_model extends CI_MODEL
 	     		user_firstname LIKE '%".$search."%' OR 
 	     		user_lastname LIKE '%".$search."%'
 	     	)
-	     	ORDER BY user_id DESC
-	    ";
+	     	ORDER BY ". $data['Users_field'] ." ". $data['Users_orderby'];
 
 	    $query = $this->db->query($sql);
 

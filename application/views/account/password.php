@@ -18,45 +18,23 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <?php echo form_open(); ?>
                                 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?> 
-                                <?php 
-                                    if (!empty($alert['success'])) {
-                                        foreach ($alert['success'] as $key => $value) { 
-                                            echo '<div class="alert alert-success">'.$value.'</div>';
-                                        }
-                                    } 
-                                    if (!empty($alert['info'])) {
-                                        foreach ($alert['info'] as $key => $value) { 
-                                            echo '<div class="alert alert-info">'.$value.'</div>';
-                                        }
-                                    }
-                                    if (!empty($alert['warning'])) {
-                                        foreach ($alert['warning'] as $key => $value) { 
-                                            echo '<div class="alert alert-warning">'.$value.'</div>';
-                                        }
-                                    }
-                                    if (!empty($alert['danger'])) {
-                                        foreach ($alert['danger'] as $key => $value) { 
-                                            echo '<div class="alert alert-danger">'.$value.'</div>';
-                                        }
-                                    }               
-                                ?>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Clave</label>
-                                            <input type="password" name="user_password" class="form-control">
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Repetir Clave</label>
-                                            <input type="password" name="user_password_matches" class="form-control">
-                                        </div>
+                                <?php $this->load->view('dashboard/alerts'); ?>    
+                                <?php echo form_open('', array('class' => 'form-horizontal')); ?>
+                                <div class="form-group">
+                                    <label for="user_password" class="col-sm-3 control-label">Clave</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" name="user_password" class="form-control">
                                     </div>
-                                </div> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_password_matches" class="col-sm-3 control-label">Repetir Clave</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" name="user_password_matches" class="form-control">
+                                    </div>
+                                </div>
                                 <div class="box-footer">
+                                    <a href="<?php echo site_url('account/index'); ?>" class="btn btn-default pull-left"><i class="fa fa-arrow-left"></i> Volver</a>
                                     <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Guardar</button>
                                     <input name="user_uid" class="form-control" type="hidden" value="<?php echo $row['user_uid']; ?>">
                                 </div>                              

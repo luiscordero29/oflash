@@ -88,7 +88,7 @@ Class Authentication_model extends CI_MODEL
 
 		# email
 		$to = $user_email;
-		$from = 'info@oflash.com.ve';
+		$from = 'info@oflash.la';
 		$data['title'] = 'Registro de Usuario';
 		$data['content']  = '<p>Bienvenido al Content Manager System, a continuación le enviamos sus datos de acceso</p>';
 		$data['content'] .= '<p><b>NOMBRES:</b> '.$user_firstname.'</p>';
@@ -158,7 +158,7 @@ Class Authentication_model extends CI_MODEL
 
 			# email
 			$to = $user_email;
-			$from = 'info@oflash.com.ve';
+			$from = 'info@oflash.la';
 			$data['title'] = 'Recuperar Clave';
 			$data['content']  = '<p>Bienvenido al Content Manager System, a continuación le enviamos sus datos de acceso</p>';
 			$data['content'] .= '<p><b>E-MAIL:</b> '.$user_email.'</p>';

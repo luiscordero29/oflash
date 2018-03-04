@@ -6,7 +6,7 @@
     <title>Content Manager System | Panel Control</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url('assets/font-awesome/css/font-awesome.min.css'); ?>">
@@ -15,20 +15,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/css/AdminLTE.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/css/skins/_all-skins.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/css/Custom.css'); ?>">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/iCheck/square/blue.css'); ?>">
-    <!-- Morris chart -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/morris/morris.css'); ?>">
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css'); ?>">
-    <!-- Date Picker -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/datepicker/datepicker3.css'); ?>">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/daterangepicker/daterangepicker.css'); ?>">
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>">
-
+    <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/css/Custom.css'); ?>">  
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

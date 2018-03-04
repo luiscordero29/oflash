@@ -1,0 +1,19 @@
+{
+  "name": "oflash",
+  "homepage": "https://github.com/luiscordero29/oflash",
+  "authors": [
+    "Luis Cordero <info@luiscordero29.com>"
+  ],
+  "description": "oflash latino america",
+  "main": "index.php",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ]
+}
