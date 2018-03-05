@@ -1,3 +1,4 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
@@ -28,7 +29,7 @@
                             <li><a href="<?php echo site_url('categories/index') ?>"><i class="fa fa-circle-o"></i> Tabla de Categorias</a></li>
                         </ul>
                     </li> 
-                    <li class="treeview">
+                    <li id="users" class="treeview">
                         <a href="#">
                             <i class="fa fa-users"></i> <span>Usuarios</span>
                             <span class="pull-right-container">
@@ -36,10 +37,11 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?php echo site_url('users/index') ?>"><i class="fa fa-circle-o"></i> Tabla de Usuarios</a></li>
+                            <li id="users-index"><a href="<?php echo site_url('users/index') ?>"><i class="fa fa-circle-o"></i> Tabla de Usuarios</a></li>
+                            <li id="roles-index"><a href="<?php echo site_url('roles/index') ?>"><i class="fa fa-circle-o"></i> Tabla de Roles</a></li>
                         </ul>
                     </li> 
-                    <li class="treeview">
+                    <li id="account" class="treeview">
                         <a href="#">
                             <i class="fa fa-user"></i> <span>Cuenta</span>
                             <span class="pull-right-container">
@@ -47,10 +49,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?php echo site_url('account/index') ?>"><i class="fa fa-circle-o"></i> Ver Cuenta</a></li>
-                            <li><a href="<?php echo site_url('account/update') ?>"><i class="fa fa-circle-o"></i> Editar Cuenta</a></li>
-                            <li><a href="<?php echo site_url('account/password') ?>"><i class="fa fa-circle-o"></i> Cambiar Clave</a></li>
-                            <li><a href="<?php echo site_url('account/logout') ?>"><i class="fa fa-circle-o"></i> Cerrar Sesión</a></li>
+                            <li id="account-index"><a href="<?php echo site_url('account/index') ?>"><i class="fa fa-circle-o"></i> Ver Cuenta</a></li>
+                            <li id="account-update"><a href="<?php echo site_url('account/update') ?>"><i class="fa fa-circle-o"></i> Editar Cuenta</a></li>
+                            <li id="account-password"><a href="<?php echo site_url('account/password') ?>"><i class="fa fa-circle-o"></i> Cambiar Clave</a></li>
+                            <li id="account-logout"><a href="<?php echo site_url('account/logout') ?>"><i class="fa fa-circle-o"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>        
                 </ul>

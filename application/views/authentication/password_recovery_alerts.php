@@ -8,7 +8,7 @@
     <meta name="generator" content="Luis Cordero - http://luiscordero29.com/" />   
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="<?php echo base_url('vendor/bootstrap/dist/css/bootstrap.min.css'); ?>">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url('vendor/font-awesome/css/font-awesome.min.css'); ?>">
@@ -63,9 +63,9 @@
     </div>
     <!-- /.register-box -->
 
-    <!-- jQuery 2.2.3 -->
+    <!-- jQuery -->
     <script src="<?php echo base_url('vendor/jquery/dist/jquery.js'); ?>"></script>
-    <!-- Bootstrap 3.3.6 -->
+    <!-- Bootstrap -->
     <script src="<?php echo base_url('vendor/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
     <!-- iCheck -->
     <script src="<?php echo base_url('vendor/admin-lte/plugins/iCheck/icheck.min.js'); ?>"></script>

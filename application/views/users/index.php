@@ -24,10 +24,10 @@
                                                 echo form_open('users/index', array('class' => 'form-inline pull-right')); 
                                             ?>
                                             <div class="input-group input-group-sm">
-                                                <input type="text" name="Users_search" class="form-control pull-right" placeholder="Buscar" value="<?php echo $data['Users_search']; ?>">
+                                                <input type="text" name="Users_search" class="form-control pull-right" placeholder="Buscar" value="<?php echo $Users_search; ?>">
                                             </div>
-                                            <input type="hidden" name="Users_field" value="<?php echo $data['Users_field']; ?>">
-                                            <input type="hidden" name="Users_orderby" value="<?php echo $data['Users_orderby']; ?>">
+                                            <input type="hidden" name="Users_field" value="<?php echo $Users_field; ?>">
+                                            <input type="hidden" name="Users_orderby" value="<?php echo $Users_orderby; ?>">
                                             <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-search"></i> BUSCAR</button>
                                             <?php 
                                                 echo form_close(); 
@@ -47,8 +47,8 @@
                                                         </div>
                                                         <div class="pull-right">
                                                             <div class="btn-group" role="group">
-                                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-sort-alpha-asc"></i></button>
-                                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-sort-alpha-desc"></i></button>
+                                                                <button type="button" class="btn btn-default btn-xs <?php if($Users_field == 'users.user_lastname' and $Users_orderby == 'asc'){ echo 'btn-info'; } ?> users-search" data-field="users.user_lastname" data-orderby="asc"><i class="fa fa-sort-alpha-asc"></i></button>
+                                                                <button type="button" class="btn btn-default btn-xs <?php if($Users_field == 'users.user_lastname' and $Users_orderby == 'desc'){ echo 'btn-info'; } ?> users-search" data-field="users.user_lastname" data-orderby="desc"><i class="fa fa-sort-alpha-desc"></i></button>
                                                             </div>
                                                         </div>
                                                     </th>
@@ -58,8 +58,8 @@
                                                         </div>
                                                         <div class="pull-right">
                                                             <div class="btn-group" role="group">
-                                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-sort-alpha-asc"></i></button>
-                                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-sort-alpha-desc"></i></button>
+                                                                <button type="button" class="btn btn-default btn-xs <?php if($Users_field == 'users.user_firstname' and $Users_orderby == 'asc'){ echo 'btn-info'; } ?> users-search" data-field="users.user_firstname" data-orderby="asc"><i class="fa fa-sort-alpha-asc"></i></button>
+                                                                <button type="button" class="btn btn-default btn-xs <?php if($Users_field == 'users.user_firstname' and $Users_orderby == 'desc'){ echo 'btn-info'; } ?> users-search" data-field="users.user_firstname" data-orderby="desc"><i class="fa fa-sort-alpha-desc"></i></button>
                                                             </div>
                                                         </div>
                                                     </th>
@@ -69,8 +69,8 @@
                                                         </div>
                                                         <div class="pull-right">
                                                             <div class="btn-group" role="group">
-                                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-sort-alpha-asc"></i></button>
-                                                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-sort-alpha-desc"></i></button>
+                                                                <button type="button" class="btn btn-default btn-xs <?php if($Users_field == 'users.user_email' and $Users_orderby == 'asc'){ echo 'btn-info'; } ?> users-search" data-field="users.user_email" data-orderby="asc"><i class="fa fa-sort-alpha-asc"></i></button>
+                                                                <button type="button" class="btn btn-default btn-xs <?php if($Users_field == 'users.user_email' and $Users_orderby == 'desc'){ echo 'btn-info'; } ?> users-search" data-field="users.user_email" data-orderby="desc"><i class="fa fa-sort-alpha-desc"></i></button>
                                                             </div>
                                                         </div>
                                                     </th>
@@ -87,13 +87,11 @@
                                                     <td><?php echo $r['user_lastname']; ?></td>
                                                     <td><?php echo $r['user_email']; ?></td>
                                                     <td>
-                                                        <?php if($this->session->userdata('user_uid')<>$r['user_uid']){ ?>
                                                         <div class="btn-group-vertical pull-right">
                                                           <a title="Ver" href="<?php echo site_url($this->controller.'/view/'.$r['user_uid']); ?>" class="btn btn-default btn-xs"><i class="fa fa-eye"></i> Ver</a>
                                                           <a title="Editar" href="<?php echo site_url($this->controller.'/update/'.$r['user_uid']); ?>" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Editar</a>
                                                           <a title="Borrar" onclick="return confirm('¿Desea eliminar el registro?')" href="<?php echo site_url($this->controller.'/delete/'.$r['user_uid']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i> Borrar</a>
                                                         </div>
-                                                        <?php } ?>
                                                     </td>
                                                 </tr>
                                                 <?php }} ?>
@@ -113,11 +111,11 @@
                                         <ul class="pagination">
                                             <?php            
                                                 $pagination = (int)($table_rows / $table_limit);
-                                                for ($item=0; $item <= $pagination ; $item++) { 
+                                                for ($item=1; $item < $pagination ; $item++) { 
                                             ?>                                         
                                                 <li <?php if($item == $table_page): ?>class="active"<?php endif; ?>>
-                                                    <a href="<?php echo site_url($this->controller.'/index/table_page/'.$item.$search_url); ?>">
-                                                        <?php echo $item+1; ?>
+                                                    <a href="<?php echo site_url($this->controller.'/index/page/'.$item); ?>">
+                                                        <?php echo $item; ?>
                                                     </a>
                                                 </li>
                                             <?php                            
@@ -136,6 +134,15 @@
             </section>
             <!-- /.content -->
         </div>
+    <?php 
+        echo form_open('users/index', array('id' => 'users-form-search')); 
+    ?>
+        <input type="hidden" id="users-form-search-field" name="Users_field" value="">
+        <input type="hidden" id="users-form-search-orderby" name="Users_orderby" value="">
+        <input type="hidden" id="users-form-search-search" name="Users_search" value="<?php echo $Users_search; ?>">
+    <?php 
+        echo form_close(); 
+    ?>
 <?php $this->load->view('dashboard/footer'); ?>      
 
 

@@ -1,3 +1,4 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php $this->load->view('dashboard/head'); ?>    
 <?php $this->load->view('dashboard/header'); ?>
 <?php $this->load->view('dashboard/aside-sidebar'); ?>

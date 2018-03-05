@@ -1,3 +1,4 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php 
     if (!empty($alert['success'])) {
         foreach ($alert['success'] as $key => $value) { 

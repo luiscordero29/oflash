@@ -26,7 +26,7 @@ class Users extends CI_Controller {
 	}
 		
 
-	public function index($table_page=null,$id=null,$search=null)
+	public function index()
 	{
 					
 		$data = 
@@ -42,45 +42,34 @@ class Users extends CI_Controller {
 					),
 			);
 
-		if($this->form_validation->run() == FALSE){
-			$data['Users_search'] = $this->input->post('Users_search');
+		if ($this->input->post('Users_search')) {
+            $data['Users_search'] = $this->input->post('Users_search');
+            $this->session->set_userdata('Users_search', $data['Users_search']);	                
+        }else{
+            $data['Users_search'] = '';
+            $this->session->unset_userdata('Users_search');
+        }
+        if ($this->input->post('Users_field')) {
             $data['Users_field'] = $this->input->post('Users_field');
+            $this->session->set_userdata('Users_field', $data['Users_field']);	                
+        }else{
+            $data['Users_field'] = 'users.user_id';
+            $this->session->unset_userdata('Users_field');
+        }
+        if ($this->input->post('Users_orderby')) {
             $data['Users_orderby'] = $this->input->post('Users_orderby');
-            $this->session->set_userdata('Users_search', $data['Users_search']);	
-            $this->session->set_userdata('Users_field', $data['Users_field']);	
-            $this->session->set_userdata('Users_orderby', $data['Users_orderby']);	
-		}else{
-			if ($this->session->has_userdata('Users_search')) {
-                $data['Users_search'] = $this->session->set_userdata('Users_search');
-            	$this->session->set_userdata('Users_search', $data['Users_search']);	                
-            }else{
-                $data['Users_search'] = '';
-               	$this->session->unset_userdata('Users_search');
-            }
-            if ($this->session->has_userdata('Users_field')) {
-                $data['Users_field'] = $this->session->set_userdata('Users_field');
-            	$this->session->set_userdata('Users_field', $data['Users_field']);	                
-            }else{
-                $data['Users_field'] = 'users.id';
-               	$this->session->unset_userdata('Users_field');
-            }
-            if ($this->session->has_userdata('Users_orderby')) {
-                $data['Users_orderby'] = $this->session->set_userdata('Users_orderby');
-            	$this->session->set_userdata('Users_orderby', $data['Users_orderby']);	                
-            }else{
-                $data['Users_orderby'] = 'desc';
-               	$this->session->unset_userdata('Users_orderby');
-            }
-		}
+            $this->session->set_userdata('Users_orderby', $data['Users_orderby']);	                
+        }else{
+            $data['Users_orderby'] = 'desc';
+            $this->session->unset_userdata('Users_orderby');
+        }           
 				
 		$data['table_limit'] 	= 30;
-		$data['table_page'] 	= ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;		
-		$data['controller'] 	= $this->controller;				
+		$data['table_page'] 	= ($this->uri->segment(4)) ? $this->uri->segment(4) : 1;		
 		$data['table'] 			= $this->Users_model->table($data);
 		$data['table_rows'] 	= $this->Users_model->table_rows($data);
 
-		$this->load->view($this->controller.'/index',$data);				
-		
+		$this->load->view($this->controller.'/index',$data);					
 	}
 
 

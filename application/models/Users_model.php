@@ -10,8 +10,8 @@ Class Users_model extends CI_MODEL
 	{
 	    
 	   	$search = $data['Users_search'];
-	   	$limit = $data['table_limit']*($data['table_page']-1);
-	   	$start = $data['Users_search'];
+	   	$page = $data['table_limit']*($data['table_page']-1);
+	   	$rows = $data['table_limit'];
 	    $sql = "
 	    	SELECT * FROM users WHERE 
 	    	(user_status = 'yes') AND
@@ -21,7 +21,7 @@ Class Users_model extends CI_MODEL
 	     		user_lastname LIKE '%".$search."%'
 	     	)
 	     	ORDER BY ". $data['Users_field'] ." ". $data['Users_orderby'] ."
-	     	LIMIT  ".$limit.",".$start."
+	     	LIMIT  ".$page.",".$rows."
 	    ";
 
 	    $query = $this->db->query($sql);
@@ -33,7 +33,7 @@ Class Users_model extends CI_MODEL
 	    }
 	}
 
-	function table_rows()
+	function table_rows($data)
 	{
 	    
 	    $search = $data['Users_search'];
